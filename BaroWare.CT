@@ -1,1 +1,3 @@
+function asd()
 print('hello')
+end
