@@ -776,17 +776,6 @@ fly:
 unregistersymbol(fly)
 dealloc(flymem)
 </AssemblerScript>
-          <Hotkeys>
-            <Hotkey>
-              <Action>Toggle Activation</Action>
-              <Keys>
-                <Key>4</Key>
-              </Keys>
-              <ID>0</ID>
-              <ActivateSound>Activate</ActivateSound>
-              <DeactivateSound>Deactivate</DeactivateSound>
-            </Hotkey>
-          </Hotkeys>
         </CheatEntry>
         <CheatEntry>
           <ID>113085</ID>
@@ -960,17 +949,6 @@ dealloc(coomem)
               <Offsets>
                 <Offset>4</Offset>
               </Offsets>
-              <Hotkeys>
-                <Hotkey>
-                  <Action>Increase Value</Action>
-                  <Keys>
-                    <Key>112</Key>
-                  </Keys>
-                  <Value>15</Value>
-                  <ID>0</ID>
-                  <ActivateSound>Activate</ActivateSound>
-                </Hotkey>
-              </Hotkeys>
             </CheatEntry>
             <CheatEntry>
               <ID>113815</ID>
