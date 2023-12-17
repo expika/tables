@@ -5,12 +5,14 @@
       <ID>113461</ID>
       <Description>"⚔Main"</Description>
       <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
       <Color>6400C8</Color>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>113067</ID>
           <Description>"Infinity ammo"</Description>
+          <LastState/>
           <Color>6400C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -47,6 +49,7 @@ dealloc(ammmem)
           <ID>113792</ID>
           <Description>"No spread"</Description>
           <Options moAlwaysHideChildren="1" moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
+          <LastState/>
           <Color>6400C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -81,6 +84,7 @@ dealloc(sprmem)
         <CheatEntry>
           <ID>113069</ID>
           <Description>"Rapid fire"</Description>
+          <LastState/>
           <Color>6400C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -115,6 +119,7 @@ dealloc(rapmem)
         <CheatEntry>
           <ID>113404</ID>
           <Description>"Fast reload"</Description>
+          <LastState/>
           <Color>6400C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -150,6 +155,7 @@ dealloc(relmem)
         <CheatEntry>
           <ID>113765</ID>
           <Description>"1-hit terrarian"</Description>
+          <LastState/>
           <Color>6400C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -184,6 +190,7 @@ dealloc(termem)
         <CheatEntry>
           <ID>112956</ID>
           <Description>"Fast power attack"</Description>
+          <LastState/>
           <Color>6400C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -222,12 +229,14 @@ dealloc(powmem)
       <ID>113462</ID>
       <Description>"👁Visual"</Description>
       <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
       <Color>969600</Color>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>113266</ID>
           <Description>"No recoil"</Description>
+          <LastState/>
           <Color>969600</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -262,6 +271,7 @@ dealloc(recmem)
           <ID>113821</ID>
           <Description>"Fullbright"</Description>
           <Options moAlwaysHideChildren="1" moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1" moAllowManualCollapseAndExpand="1"/>
+          <LastState/>
           <Color>969600</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -301,6 +311,7 @@ dealloc(fulmem)
         <CheatEntry>
           <ID>113517</ID>
           <Description>"Infinity enemy ping"</Description>
+          <LastState/>
           <Color>969600</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -338,12 +349,14 @@ dealloc(pinmem)
       <ID>113463</ID>
       <Description>"🥾Movement"</Description>
       <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
       <Color>0064C8</Color>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>113436</ID>
           <Description>"Infinity jumps"</Description>
+          <LastState/>
           <Color>0064C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -379,6 +392,7 @@ dealloc(newmem)
         <CheatEntry>
           <ID>113807</ID>
           <Description>"Acceleration"</Description>
+          <LastState/>
           <Color>0064C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -415,6 +429,7 @@ dealloc(accmem)
           <ID>113809</ID>
           <Description>"Walk speed"</Description>
           <Options moHideChildren="1" moAllowManualCollapseAndExpand="1"/>
+          <LastState/>
           <Color>0064C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -468,6 +483,7 @@ dealloc(walmem)
           <ID>113316</ID>
           <Description>"Jump power"</Description>
           <Options moHideChildren="1"/>
+          <LastState/>
           <Color>0064C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -529,6 +545,7 @@ dealloc(jumhmem)
           <ID>113492</ID>
           <Description>"Height"</Description>
           <Options moHideChildren="1"/>
+          <LastState/>
           <Color>0064C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -588,6 +605,7 @@ dealloc(heimem)
         <CheatEntry>
           <ID>113397</ID>
           <Description>"No collision"</Description>
+          <LastState/>
           <Color>0064C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -623,6 +641,7 @@ dealloc(colmem)
         <CheatEntry>
           <ID>5</ID>
           <Description>"No fall"</Description>
+          <LastState/>
           <Color>0064C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -660,12 +679,14 @@ dealloc(falmem)
       <ID>113464</ID>
       <Description>"💧Specific"</Description>
       <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
       <Color>009696</Color>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>34504</ID>
           <Description>"Fast hook"</Description>
+          <LastState/>
           <Color>FF5700</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -700,6 +721,7 @@ dealloc(hoomem)
         <CheatEntry>
           <ID>113822</ID>
           <Description>"A+D spammer"</Description>
+          <LastState/>
           <Color>009696</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{$LUA}
@@ -717,12 +739,14 @@ createTimer(1, function() memrec.active = false end)
           <ID>113460</ID>
           <Description>"More players [Host]"</Description>
           <Options moHideChildren="1" moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1" moAllowManualCollapseAndExpand="1"/>
+          <LastState Value="" RealAddress="00000000"/>
           <Color>009696</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
               <ID>113450</ID>
               <Description>"More Players H"</Description>
+              <LastState/>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : FSD-Win64-Shipping.exe
   Version: 
@@ -793,6 +817,7 @@ FSD-Win64-Shipping.exe+16BDC06: CC                    - int 3
             <CheatEntry>
               <ID>113451</ID>
               <Description>"More Players Fix H"</Description>
+              <LastState/>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : FSD-Win64-Shipping.exe
   Version: 
@@ -866,6 +891,7 @@ FSD-Win64-Shipping.exe+1341C33: 49 89 6B 18           - mov [r11+18],rbp
           <ID>115207</ID>
           <Description>"coord scan"</Description>
           <Options moHideChildren="1"/>
+          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 
@@ -936,6 +962,7 @@ dealloc(coomem)
           <ID>114465</ID>
           <Description>"cam scan"</Description>
           <Options moHideChildren="1"/>
+          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 
@@ -998,11 +1025,13 @@ dealloc(cammem)
       <ID>113065</ID>
       <Description>"💡Misc"</Description>
       <Options moHideChildren="1"/>
+      <LastState Value="" Activated="1" RealAddress="00000000"/>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>113066</ID>
           <Description>"Save config"</Description>
+          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{$LUA}
 [ENABLE]
@@ -1018,11 +1047,12 @@ createTimer(1, function() memrec.active = false end)
         <CheatEntry>
           <ID>2</ID>
           <Description>"Load config"</Description>
+          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{$LUA}
 [ENABLE]
 
-on = decodeFunction('c-n1J(2AGh5FT$P-epw@s3$.#93m+K#4}uCUx{nhfVfmaTJ5?9i%lG?9okArc:[w4.:)I%.wd(j](LLy0*Y#2?cek?n^URxJ*Fl,.pXS7.jIt?41$yA?K3gn1p[3bv2yvN/sk)4PC(}!2ml/1:#TBnwe7oT;A(T$x4wJFs_Z5)=fpu[[YX[$i#D]]175YkhYs^8**zmZbhxZzgnz}:q[{]ST*?7#fKt=9yJC)nh^pmvzwCN/tFG5??HZANy65-Z(o@B3h*WN8t[^QL5+E{YCEQZ?)1MaR9N_O{2/BL.1QwS4bH3/96xE;;0ec[-zAka7egg*=6(M!-h,F[4X%A.kurD./B=$Ob0b5i7j4QXwy9cCcUs$)lBC*0o?,8.EOY{0lmPs3;X)5dnDr3/b.T.N%/U_+zPh[HtbnmnyO.V[tReFkEiZ[x%##TO[$!SN$xz3P3Q#O}lG1PI_O!V_nW$5:+Ze?X,=Uip^=;tNnGYsU3Oy+XicZfBmv91XQuTZkwkBOdFY@?)1d0Wq=c8jh3O:bFpp3ep^PGvzK!jBTGUP/)gE!32HW_P/@M[4C/Db^vk/OeUp?h*S=O*lkZHMt=C:13opXy]bTc;OoSW:]y7,B]sPnlXd[$uAmGq)J')
+on = decodeFunction('c-n1J(2G}]5T11:;%:MrloKFA4pAvZ.u,S;=.$A(5SJ:Q#??OsoNVNEXe%MH:C7CDcm,.8g$:aacnV$viAf-EVGcV#yWcn8tmejO5j:uxA1-./J+.7@cKihX,4hlOfD_-WDSxm$gaFqHXj:/40L#Ju6We=pyVhUkuQ{_l?80mj2hV/fyYlem-O^[F18re{7aee,3w@2$#8:2IE@(/bPg#Lf7chWx+c0cFiz.jv%/[[Sl.F5_($)6foTi1pHLvWQ-L@kpanUC(edyZ]jEV}:sY@t;xp1KkIcr,t?qG{=vUU#4%Liw=9Dwgvq3r^@BLF?vc=iD(L)(S2iy];72Jeacv;37r]j2n6U[WS1(IEiXUPgGI*#0NBrxbOV6n2H)0t.L8hgi,jRANON/YA*2:jg/EIhL6pMX5Aqq*dj,7.jQ)ET:j;c[;4jM!P3nX}I.@Go?$fM0hn!Wsu4Hb2.m)Aki]M$0_!CZj5vgwL)2RP%+lFm1Hu-(CV){FL(.R2Qk+/u=!cPMCSl2N?G/M4c6)g,zUvalQ!0ifV]s?v#i0@]KB[1R4=X38ALLrC2^;QQ!gaCCQH=fddAZr3lFhM0wb+K1jzTFdXu{1AvcMX@VQ@rl$t_+G@U{0SmKr63R=-Omr-jU)JY:daNQMKX2Rfq[6uq^st5')
 on()
 
 createTimer(1, function() memrec.active = false end)
