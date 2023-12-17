@@ -714,23 +714,6 @@ createTimer(1, function() memrec.active = false end)
 </AssemblerScript>
         </CheatEntry>
         <CheatEntry>
-          <ID>113833</ID>
-          <Description>"Auto leaver"</Description>
-          <Color>009696</Color>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>{$LUA}
-[ENABLE]
-
-on = decodeFunction('c-oCnJx^_h5WOVEN}3}676Y(%*RmpV33Vhy,eG98wkSd#5NT31X$zafz#rfb/##b+CoNS$LY)CDy=b{;d[Eg3)g03A[N]M3naDI;V%XYXMK#c5aMVJ+Cmp5}(V;LIKwzL=HMCZDCOM13,XV;NlQGgO*PJ1wwBq5?l,RJ]Ca=H;nPx.:%OlgvTdqsA9=5gqLSvw(No7_{q?ZCz!ET[7!QRcwhjy[oYc!{qmssrfPzPM$z/c9BBsch[sd}YHni}J:Rhu5PYdrJUVX={Q72hT-xVC,UaG7yFBi3eBENh_{]P_?s$+Xa)D7jyh/PvvTa]jD56[?ZO(nt91[M)8Xm]y?A88J5.diN7Ver6,_,!/?32OYM5]lo#Xmq:9+')
-on()
-
-[DISABLE]
-
-off = decodeFunction('c-oWpDNPJ!ketlRCB=/U!NS2(5ypT38s!d+42)bqGnmW70wmZN92nRg92is[8W[_V8W?.;Vk{H0EF3AR#U){gm5dD7002]O3OW')
-off()
-</AssemblerScript>
-        </CheatEntry>
-        <CheatEntry>
           <ID>113460</ID>
           <Description>"More players [Host]"</Description>
           <Options moHideChildren="1" moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1" moAllowManualCollapseAndExpand="1"/>
@@ -1024,8 +1007,8 @@ dealloc(cammem)
           <AssemblerScript>{$LUA}
 [ENABLE]
 
-saved = decodeFunction('c-n1Gy-ve05WaH]Cn[xrWdWp=p?OpT3^F!}hQfjbbCkHj5^j!hZP^:b:mRkGE:gaD1yiZ(!Z*10Kb]K+r.GRzPQN.;vlayu1aD8U$8aSO)2;qo2G=$IA.7l,!Wy7+.lNr904%rRABO/!2i6F.B7[NS.6ZGl5*6idEDuBQ8)?AlV+Pr:df?Fnj96bptXHGuD4//M=9+lI2E26;c={YLH_PyQi(yaT(cSuW7zP56,p*Wcw*[$-oVYuQ(B#-l4*k2,bU2Nk/3ipfvy9k@SVqU0EW/P^q%l*v%I?xG.+nnDWfyna50g=YB[bUuGb!_9ekbEp7U-)0LY0!+V]-8=%{b=oVlCpyt2WLyFM4)F[Q#o_PNegh${UX2lqtf0[yud$P#@')
-saved()
+on = decodeFunction('c-n1H!A]/J5S]hM,lGLe.6,Wq15v#A4O;dY19}yhbJH$$6VoN#0@ZzukPq/ezqI[87grL)#dnyzH#2#8Gw0Jq^0OICoz[^40t$k,C*i]S5)wnT?m2:cu5cm1w+tZ%paO){wHN=cZo?wg0oV[$5pG2Y6WG9m+gz#13/X(phTu2A^A$Gd@?#Pr,xIYHeG#!/jh3T.b]]NtH)NL0t))Yekl=#PZxC9%f{eK_Zbyt@AON]=yF9ezmtf)//s;#EPiZ;PbD2_nTx8F2A#ajdMr:haqoYigVVV{wn5i.lcXu?LNH6lTi#zRyNvW0,kq)ua6nZhglW^5w[Zq$]R4JXiG*bZ6rP4XE7V,d(8]m}3dUfyo/4jT})*mnf7bafH6yZPo0^LiAwE')
+on()
 
 createTimer(1, function() memrec.active = false end)
 
@@ -1039,8 +1022,8 @@ createTimer(1, function() memrec.active = false end)
           <AssemblerScript>{$LUA}
 [ENABLE]
 
-loaded = decodeFunction('c-n1I(2AGh5FT$P-epw@s3*i;IYdy3#4}uCUx{nhfVfmaTJ1Vpi%lG?9okArc:[w4.:)I%.wd(j](LLy0*Y!YcxFD(eDlqCdoYim!p,ZD!(?N,7z8KJ.osRk77Q3U,pCa2T3$kc=+ufRg8.yBi2nGlT;HL?mhoE-]_G!Nyow-n-]:k+eE,btzGy+HIN))ad{u=Lu%7q/rNd/%BmOg1A;jggZ},J60!mSb-HJKBARP/v^IcWSsXE=^gTGj}:$zkkKi[cCB]sa)x*uzoOIT2slz2/wLla82/A@7UKrqLeC9tsUo%2NxqNond2-tlA?O8.U@(8M9t-!eGL+xSZNP9SQf[/U,E/wPj3fQ6wU^twP-d!L_]?+[a6Nxo#kSDoLUZR*bwM@P5O$%wvKpBhP5N^JSloMT=K9Pwo)+4u6G*bXmR[Q5vDc)p58C(@yCZ{x]:Q;0FOxaxG#z4nuBhk}b%Fyqs,^ywsTdUZ--g{sgGYsU3Oy+XiH@!RMSl2^?S14H=#3auvw$]7Hyrt).yT#V:rZT-k(u4uZr=Oyxew0{CN{[LUp^CR]o5VIb!a4}_v9:c?KYS669x#U7/WkO7lN)ZMj]Z:6hK?6d+MBQ*/fLAvjYGtS88P[Z]2]D1q(o')
-loaded()
+on = decodeFunction('c-n1J(2AGh5FT$P-epw@s3$.#93m+K#4}uCUx{nhfVfmaTJ5?9i%lG?9okArc:[w4.:)I%.wd(j](LLy0*Y#2?cek?n^URxJ*Fl,.pXS7.jIt?41$yA?K3gn1p[3bv2yvN/sk)4PC(}!2ml/1:#TBnwe7oT;A(T$x4wJFs_Z5)=fpu[[YX[$i#D]]175YkhYs^8**zmZbhxZzgnz}:q[{]ST*?7#fKt=9yJC)nh^pmvzwCN/tFG5??HZANy65-Z(o@B3h*WN8t[^QL5+E{YCEQZ?)1MaR9N_O{2/BL.1QwS4bH3/96xE;;0ec[-zAka7egg*=6(M!-h,F[4X%A.kurD./B=$Ob0b5i7j4QXwy9cCcUs$)lBC*0o?,8.EOY{0lmPs3;X)5dnDr3/b.T.N%/U_+zPh[HtbnmnyO.V[tReFkEiZ[x%##TO[$!SN$xz3P3Q#O}lG1PI_O!V_nW$5:+Ze?X,=Uip^=;tNnGYsU3Oy+XicZfBmv91XQuTZkwkBOdFY@?)1d0Wq=c8jh3O:bFpp3ep^PGvzK!jBTGUP/)gE!32HW_P/@M[4C/Db^vk/OeUp?h*S=O*lkZHMt=C:13opXy]bTc;OoSW:]y7,B]sPnlXd[$uAmGq)J')
+on()
 
 createTimer(1, function() memrec.active = false end)
 
@@ -1051,7 +1034,7 @@ createTimer(1, function() memrec.active = false end)
     </CheatEntry>
   </CheatEntries>
   <UserdefinedSymbols/>
-  <LuaScript>DrgWare = decodeFunction('c-n/gO;fgc5S=^KjuS#E*kx)-h#snnOM8Hd@R83EC6yw%q6frbV-Lwnj(0d%5@ft1]}m(}M{9/7A((ee*@6H{6C;@Dy_-?.@XAE?k_8_$e!u(.iynI3?-6J?]GPZG7VI@(wQrlpx$*L}/$^1CV[.{Fbh-KLnt%8g7XoPW0J]hos_y1Vyahk*^1G=o7!33,MkmLEVR)LWrP5btC+e%xxk^({v=O#:JUB0:SF*hPcjIc3sOWG}sU(]ndsEUP(#fZ0%2ISMl{-qIR:$ub9cINGy?AY_()59H9=O*HGxR;HQcV)KfW4=7sp)S9sqoo$Yqskh]{z(-Jhjc]9E1T[t*bqPc;t!-tos]m?T;N$1pKgn8_!fyhyF%5Vq/5R1HUc+Bd%NQy2${u6TomCSPZPrsLrp:2Y1;orv;@pl(I1*$YL60kxX7M?nKa]?$$v#8]9yYQq%l]bfKcszday6+g8VeHsd(3jI$E(eX#I],L--k(W,hWz6G/@cD$G6l#YumqOz:ywO:P,:{c%XquEH68d1hEga6fE$t#53')
-DrgWare()
+  <LuaScript>on = decodeFunction('c-n/gO;fgc5S=^KjvGP_HB$KyqKB(D)jK7Vyz7+3Nu?{x:mBxq+h8_CV[Wu]gxjVS^R90A9QhGRg+ft=Si5N;POP-E?4bC/m@Uv5l=;t8@}28d4tnT$@N,AOuV/VATCmg5R^eOK8+j-ME)q8,2Kt6Whnox6^KGF?2%yaa:q!WpF7!a}7W{mR]]oYtFtBYgIyvt4!.]}vmA+SZ3?0kjRXRSRIiZu^=nyB_mj((88djr3MSG*4CGlr]G$t,b,$vJ5EJgQB;4dOr/x^EBepXD.;(d,N,]5/ALzz-=jNVsOs!;9Av}E/8*O4n%RQPN=HQUs#y@kBZ[0krXa{Wk#v4nb7/@h.Sv,gS^.8+Qg2;4/DR?UP)4%.i=h=VVO4+a)KkGN@En/fWzO#uC6U??;dqdLDf?7-(goM!0TP?,mxFN/lAMKXCm$EQ[E#oISWA4rGaN:=(K)uImj_89Z!WbFt@,l:FEHq1)V?WsMgYGd_aIk#s2.0^b$;-KJzQ#vfNh_02F*:r(#r8A,mj3xtBYD5^w4E{fi0@VnY;H')
+on()
 </LuaScript>
 </CheatTable>

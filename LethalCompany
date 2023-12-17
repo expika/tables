@@ -5,12 +5,14 @@
       <ID>113498</ID>
       <Description>"⚔Main"</Description>
       <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
       <Color>6400C8</Color>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>113486</ID>
           <Description>"Infinity stamina"</Description>
+          <LastState/>
           <Color>6400C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -46,6 +48,7 @@ dealloc(stamem)
         <CheatEntry>
           <ID>113081</ID>
           <Description>"Zero weight"</Description>
+          <LastState/>
           <Color>6400C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -81,6 +84,7 @@ dealloc(weimem)
         <CheatEntry>
           <ID>19</ID>
           <Description>"Infinity energy"</Description>
+          <LastState/>
           <Color>6400C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -115,6 +119,7 @@ dealloc(enemem)
         <CheatEntry>
           <ID>8</ID>
           <Description>"Instant use"</Description>
+          <LastState/>
           <Color>6400C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -150,6 +155,7 @@ dealloc(usemem)
         <CheatEntry>
           <ID>113514</ID>
           <Description>"Always 1 handed"</Description>
+          <LastState/>
           <Color>6400C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -185,6 +191,7 @@ dealloc(hanmem)
         <CheatEntry>
           <ID>113497</ID>
           <Description>"Infinity interact distance"</Description>
+          <LastState/>
           <Color>6400C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -220,6 +227,7 @@ dealloc(gramem)
         <CheatEntry>
           <ID>113516</ID>
           <Description>"Shovel 1-hit"</Description>
+          <LastState/>
           <Color>6400C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -256,6 +264,7 @@ dealloc(shomem)
           <ID>113103</ID>
           <Description>"Infinity jetpack"</Description>
           <Options moHideChildren="1"/>
+          <LastState/>
           <Color>6400C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -308,6 +317,7 @@ dealloc(jetmem)
         <CheatEntry>
           <ID>113490</ID>
           <Description>"Infinity slots"</Description>
+          <LastState/>
           <Color>6400C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -346,6 +356,7 @@ dealloc(slomem)
         <CheatEntry>
           <ID>113173</ID>
           <Description>"Infinity health"</Description>
+          <LastState/>
           <Color>6400C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -392,6 +403,7 @@ dealloc(heamem)
         <CheatEntry>
           <ID>1</ID>
           <Description>"Infinity money"</Description>
+          <LastState/>
           <Color>6400C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -430,12 +442,14 @@ dealloc(newmem)
       <ID>113483</ID>
       <Description>"👁Visual"</Description>
       <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
       <Color>969600</Color>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>113504</ID>
           <Description>"Permanent clock"</Description>
+          <LastState/>
           <Color>969600</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -472,6 +486,7 @@ dealloc(clomem)
         <CheatEntry>
           <ID>113502</ID>
           <Description>"Scan through walls"</Description>
+          <LastState/>
           <Color>969600</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -509,6 +524,7 @@ dealloc(espmem)
           <ID>113501</ID>
           <Description>"Scan range"</Description>
           <Options moHideChildren="1"/>
+          <LastState/>
           <Color>969600</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -569,6 +585,7 @@ dealloc(scamem)
           <ID>105376</ID>
           <Description>"Fov changer"</Description>
           <Options moHideChildren="1"/>
+          <LastState/>
           <Color>969600</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -621,6 +638,7 @@ dealloc(fovmem)
         <CheatEntry>
           <ID>113476</ID>
           <Description>"delete walls"</Description>
+          <LastState/>
           <Color>969600</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -654,6 +672,7 @@ dealloc(newmem)
         <CheatEntry>
           <ID>113314</ID>
           <Description>"No helmet"</Description>
+          <LastState/>
           <Color>969600</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -694,6 +713,7 @@ dealloc(newmem)
         <CheatEntry>
           <ID>113482</ID>
           <Description>"No helmet v2"</Description>
+          <LastState/>
           <Color>969600</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -739,12 +759,14 @@ dealloc(newmem)
       <ID>113487</ID>
       <Description>"🥾Movement"</Description>
       <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
       <Color>0064C8</Color>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>113511</ID>
           <Description>"Fly"</Description>
+          <LastState/>
           <Color>0064C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -780,6 +802,7 @@ dealloc(flymem)
         <CheatEntry>
           <ID>113085</ID>
           <Description>"Jump height"</Description>
+          <LastState/>
           <Color>0064C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -816,6 +839,7 @@ dealloc(newmem)
           <ID>113087</ID>
           <Description>"Move speed"</Description>
           <Options moHideChildren="1"/>
+          <LastState/>
           <Color>0064C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -871,6 +895,7 @@ dealloc(spemem)
       <ID>113861</ID>
       <Description>"💧Specific"</Description>
       <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
       <Color>009696</Color>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
@@ -878,6 +903,7 @@ dealloc(spemem)
           <ID>113812</ID>
           <Description>"coord scan"</Description>
           <Options moHideChildren="1"/>
+          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 
@@ -955,6 +981,7 @@ dealloc(coomem)
           <ID>113859</ID>
           <Description>"cam scan"</Description>
           <Options moHideChildren="1"/>
+          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 
@@ -1007,17 +1034,19 @@ dealloc(newmem)
       <ID>113065</ID>
       <Description>"💡Misc"</Description>
       <Options moHideChildren="1"/>
+      <LastState Value="" Activated="1" RealAddress="00000000"/>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>113066</ID>
           <Description>"Save config"</Description>
+          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{$LUA}
 [ENABLE]
 
-saved = decodeFunction('c-n1Gy-ve05WaH]Cn[xrWdWp=p?OpT3^F!}hQfjbbCkHj5^j!hZP^:b:mRkGE:gaD1yiZ(!Z*10Kb]K+r.GRzPQN.;vlayu1aD8U$8aSO)2;qo2G=$IA.7l,!Wy7+.lNr904%rRABO/!2i6F.B7[NS.6ZGl5*6idEDuBQ8)?AlV+Pr:df?Fnj96bptXHGuD4//M=9+lI2E26;c={YLH_PyQi(yaT(cSuW7zP56,p*Wcw*[$-oVYuQ(B#-l4*k2,bU2Nk/3ipfvy9k@SVqU0EW/P^q%l*v%I?xG.+nnDWfyna50g=YB[bUuGb!_9ekbEp7U-)0LY0!+V]-8=%{b=oVlCpyt2WLyFM4)F[Q#o_PNegh${UX2lqtf0[yud$P#@')
-saved()
+on = decodeFunction('c-n1H!A]/J5S]hM,lGLe.6,Wq15v#A4O;dY19}yhbJH$$6VoN#0@ZzukPq/ezqI[87grL)#dnyzH#2#8Gw0Jq^0OICoz[^40t$k,C*i]S5)wnT?m2:cu5cm1w+tZ%paO){wHN=cZo?wg0oV[$5pG2Y6WG9m+gz#13/X(phTu2A^A$Gd@?#Pr,xIYHeG#!/jh3T.b]]NtH)NL0t))Yekl=#PZxC9%f{eK_Zbyt@AON]=yF9ezmtf)//s;#EPiZ;PbD2_nTx8F2A#ajdMr:haqoYigVVV{wn5i.lcXu?LNH6lTi#zRyNvW0,kq)ua6nZhglW^5w[Zq$]R4JXiG*bZ6rP4XE7V,d(8]m}3dUfyo/4jT})*mnf7bafH6yZPo0^LiAwE')
+on()
 
 createTimer(1, function() memrec.active = false end)
 
@@ -1027,12 +1056,13 @@ createTimer(1, function() memrec.active = false end)
         <CheatEntry>
           <ID>2</ID>
           <Description>"Load config"</Description>
+          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{$LUA}
 [ENABLE]
 
-loaded = decodeFunction('c-n1I(2AGh5FT$P-epw@s3*i;IYdy3#4}uCUx{nhfVfmaTJ1Vpi%lG?9okArc:[w4.:)I%.wd(j](LLy0*Y!YcxFD(eDlqCdoYim!p,ZD!(?N,7z8KJ.osRk77Q3U,pCa2T3$kc=+ufRg8.yBi2nGlT;HL?mhoE-]_G!Nyow-n-]:k+eE,btzGy+HIN))ad{u=Lu%7q/rNd/%BmOg1A;jggZ},J60!mSb-HJKBARP/v^IcWSsXE=^gTGj}:$zkkKi[cCB]sa)x*uzoOIT2slz2/wLla82/A@7UKrqLeC9tsUo%2NxqNond2-tlA?O8.U@(8M9t-!eGL+xSZNP9SQf[/U,E/wPj3fQ6wU^twP-d!L_]?+[a6Nxo#kSDoLUZR*bwM@P5O$%wvKpBhP5N^JSloMT=K9Pwo)+4u6G*bXmR[Q5vDc)p58C(@yCZ{x]:Q;0FOxaxG#z4nuBhk}b%Fyqs,^ywsTdUZ--g{sgGYsU3Oy+XiH@!RMSl2^?S14H=#3auvw$]7Hyrt).yT#V:rZT-k(u4uZr=Oyxew0{CN{[LUp^CR]o5VIb!a4}_v9:c?KYS669x#U7/WkO7lN)ZMj]Z:6hK?6d+MBQ*/fLAvjYGtS88P[Z]2]D1q(o')
-loaded()
+on = decodeFunction('c-n1J(2AGh5FT$P-epw@s3$.#93m+K#4}uCUx{nhfVfmaTJ5?9i%lG?9okArc:[w4.:)I%.wd(j](LLy0*Y#2?cek?n^URxJ*Fl,.pXS7.jIt?41$yA?K3gn1p[3bv2yvN/sk)4PC(}!2ml/1:#TBnwe7oT;A(T$x4wJFs_Z5)=fpu[[YX[$i#D]]175YkhYs^8**zmZbhxZzgnz}:q[{]ST*?7#fKt=9yJC)nh^pmvzwCN/tFG5??HZANy65-Z(o@B3h*WN8t[^QL5+E{YCEQZ?)1MaR9N_O{2/BL.1QwS4bH3/96xE;;0ec[-zAka7egg*=6(M!-h,F[4X%A.kurD./B=$Ob0b5i7j4QXwy9cCcUs$)lBC*0o?,8.EOY{0lmPs3;X)5dnDr3/b.T.N%/U_+zPh[HtbnmnyO.V[tReFkEiZ[x%##TO[$!SN$xz3P3Q#O}lG1PI_O!V_nW$5:+Ze?X,=Uip^=;tNnGYsU3Oy+XicZfBmv91XQuTZkwkBOdFY@?)1d0Wq=c8jh3O:bFpp3ep^PGvzK!jBTGUP/)gE!32HW_P/@M[4C/Db^vk/OeUp?h*S=O*lkZHMt=C:13opXy]bTc;OoSW:]y7,B]sPnlXd[$uAmGq)J')
+on()
 
 createTimer(1, function() memrec.active = false end)
 
@@ -1043,7 +1073,7 @@ createTimer(1, function() memrec.active = false end)
     </CheatEntry>
   </CheatEntries>
   <UserdefinedSymbols/>
-  <LuaScript>lc = decodeFunction('c-n/gO;fgc5S=^at^cLKYCr]f$RVmY@-%Z$;lnhtks[s^2ZYeZ9-5ULuVt?EdfNc%AK**:/VPeG.;d4e;=DL6EA8mLnK!ofy)dv6$MERe=e@m}[qgXR-opMop9:/zfZx#811g;n*=10CD,1[Q3m)8^+KY8?3TO-a#fARA^HtsGaIoqV4zFDsLa:JV5BgS5Sat#y=h*or(ix3?RHoff(vKbvo#Fzylkta9cp)eyz8h7ORK=v%rPAa+cP^zeOEf]{6j,v#D$R!HIf/lEI@+uSGAZ(7wTDt:16_Cx7s_XD9^z0_jAVxCOYVJArJAJ3fOp}orNMJG!?[4/KiIyu:@i!out(ue0s.%LTtWSEMy{YVN9t;G;SwK42JoF]Ytpz)z?2sA1Z(!14+VkiJGg1Fo5mGhJ2oK4dIFdWVdLh32:}3,,yeVRjy?Iizg1Z8!rsw2[sPPzG8pOvBOS}1@?1N*B@EEvPT!yzUzG-DLo_hoOMe$TzrR)C)Ojr3)esfm]K@xxH/Uv0pE)/]f3gG9*@?$4bIeACjwzNp*{uO:%ILrt8Bd#[xJ)k?$C0eEcskUXekF_zb)((qbiv=%:MUt6oly')
-lc()
+  <LuaScript>on = decodeFunction('c-n/g!EVz*5S=^ajvG:ym^tWO$RVmY@-%bLbr!/Kks[s^2ZYeZUYeC0uVt?EdfNc%5AX^d]3R;%9Qh^3PC}e]l1J}(yjg4CdlHsn0+{5Ob^::AM=G*)7WU]*f*StyjvLxK!s0Pzy@5[_7C[%x?Blu$c7unOL5JBdE*4$VUtK$Zb}QlEZ)PeEs9Nv=?9Hy4PQk*]#MH@CA4*S5NssG!CerIOxs:pN;2b({MJ^^q#@p3oQEytRBz^kwD_,urnjnsISrnlv%!X$fiiA-+rS63=iKJa?kAzBxI-gUIi;w)Q^B5/zB9,NY;U}m$nkEt--Hmc7jJ!}Dnfqkx2iey^^EixW)8uC327v]wRZzd2pewfNq51{$]dMpM0er^V8Z_CqaCaRz!5Vjn1HX^{4sKiIwsD2ljt$YVJ[F)cZ]@D%zVGek7RU#5@eMytRlMGXy]u}2qlHmvB-gPFbtID4OL_fkGJkP=[C{h=bz$UuBu%cO!r#SCA8r+BX*aY7;%}_X@v+_w8.YU$(zz0eKiz;?YrEdnnM{vIjxd%w*)3SerO_.gBAPWpQ4z.LPeM[q)QKqs^Yn[Yb(_-*:$yd,(L8}Wom}')
+on()
 </LuaScript>
 </CheatTable>
