@@ -862,17 +862,6 @@ dealloc(spemem)
               <Color>009696</Color>
               <VariableType>Float</VariableType>
               <Address>speed1</Address>
-              <Hotkeys>
-                <Hotkey OnlyWhileDown="1">
-                  <Action>Set Value</Action>
-                  <Keys>
-                    <Key>5</Key>
-                  </Keys>
-                  <Value>10</Value>
-                  <ID>0</ID>
-                  <ActivateSound>Activate</ActivateSound>
-                </Hotkey>
-              </Hotkeys>
             </CheatEntry>
           </CheatEntries>
         </CheatEntry>
