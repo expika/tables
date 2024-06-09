@@ -1289,9 +1289,10 @@ label(return)
 
 picmem:
   mov [rbx+400],#0//cd on power attack
+  mov [rbx+40C],#0//idk
   mov [rbx+410],#0//terrarian
   mov [rbx+414],#0//terrarian
-  mov [rbx+418],#0//terrarian
+  mov [rbx+418],#0//gold
 
 code:
   cmp byte ptr [rbx+0000037C],00
