@@ -428,6 +428,14 @@ label(code)
 label(return)
 
 plamem:
+  cmp [rbx+48],#1
+  jne code
+  cmp [rbx+4C],#4
+  jne code
+  cmp [rbx+88],#0x05D38601
+  jne code
+  cmp [rbx+124],#3593
+  jne code
   mov [playerp],rbx
 
 code:
@@ -482,16 +490,6 @@ dealloc(*)
               <Offsets>
                 <Offset>18C</Offset>
               </Offsets>
-              <Hotkeys>
-                <Hotkey OnlyWhileDown="1">
-                  <Action>Set Value</Action>
-                  <Keys>
-                    <Key>5</Key>
-                  </Keys>
-                  <Value>1500</Value>
-                  <ID>0</ID>
-                </Hotkey>
-              </Hotkeys>
             </CheatEntry>
           </CheatEntries>
         </CheatEntry>
@@ -511,11 +509,15 @@ label(code)
 label(return)
 
 plmmem:
-  cmp [rdi+114],(float)75
+  cmp [rdi+38],#0x000C0002
   jne code
-  cmp [rdi+128],#0
+  cmp [rdi+88],#0x05420607
   jne code
-  cmp [rdi+140],#0
+  cmp [rdi+D8],#13
+  jne code
+  cmp [rdi+DC],#24
+  jne code
+  cmp [rdi+14C],#0x02004621
   jne code
   mov [playermodelp],rdi
 
@@ -608,17 +610,6 @@ collision:
 unregistersymbol(collision)
 dealloc(colmem)
 </AssemblerScript>
-          <Hotkeys>
-            <Hotkey>
-              <Action>Toggle Activation</Action>
-              <Keys>
-                <Key>112</Key>
-              </Keys>
-              <ID>0</ID>
-              <ActivateSound>Activate</ActivateSound>
-              <DeactivateSound>Deactivate</DeactivateSound>
-            </Hotkey>
-          </Hotkeys>
         </CheatEntry>
         <CheatEntry>
           <ID>5</ID>
@@ -653,52 +644,6 @@ fall:
 
 unregistersymbol(fall)
 dealloc(falmem)
-</AssemblerScript>
-          <Hotkeys>
-            <Hotkey>
-              <Action>Toggle Activation</Action>
-              <Keys>
-                <Key>6</Key>
-              </Keys>
-              <ID>0</ID>
-              <ActivateSound>Activate</ActivateSound>
-              <DeactivateSound>Deactivate</DeactivateSound>
-            </Hotkey>
-          </Hotkeys>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>115467</ID>
-          <Description>"Fly up"</Description>
-          <Color>0064C8</Color>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>[ENABLE]
-//FSD-Win64-Shipping.exe+33CBF32
-aobscanmodule(flyup,FSD-Win64-Shipping.exe,F3 44 0F 11 A6 CC 00 00 00)
-alloc(flymem,$1000,flyup)
-
-label(code)
-label(return)
-
-flymem:
-
-code:
-  //movss [rsi+000000CC],xmm12
-  mov [rsi+000000CC],(float)5000
-  jmp return
-
-flyup:
-  jmp flymem
-  nop 4
-return:
-registersymbol(flyup)
-
-[DISABLE]
-
-flyup:
-  db F3 44 0F 11 A6 CC 00 00 00
-
-unregistersymbol(flyup)
-dealloc(flymem)
 </AssemblerScript>
         </CheatEntry>
       </CheatEntries>
@@ -760,15 +705,6 @@ if ~syntaxcheck then return end
 
 [DISABLE]
 </AssemblerScript>
-          <Hotkeys>
-            <Hotkey>
-              <Action>Toggle Activation</Action>
-              <Keys>
-                <Key>114</Key>
-              </Keys>
-              <ID>0</ID>
-            </Hotkey>
-          </Hotkeys>
         </CheatEntry>
         <CheatEntry>
           <ID>113833</ID>
@@ -785,17 +721,6 @@ on()
 
 t.destroy()
 </AssemblerScript>
-          <Hotkeys>
-            <Hotkey>
-              <Action>Toggle Activation</Action>
-              <Keys>
-                <Key>118</Key>
-              </Keys>
-              <ID>0</ID>
-              <ActivateSound>Activate</ActivateSound>
-              <DeactivateSound>Deactivate</DeactivateSound>
-            </Hotkey>
-          </Hotkeys>
         </CheatEntry>
         <CheatEntry>
           <ID>113460</ID>
@@ -1291,7 +1216,7 @@ picmem:
   mov [rbx+400],#0//cd on power attack
   mov [rbx+410],#0//terrarian
   mov [rbx+414],#0//terrarian
-  mov [rbx+418],#0//gold
+  mov [rbx+418],#0//minerals
 
 code:
   cmp byte ptr [rbx+0000037C],00
