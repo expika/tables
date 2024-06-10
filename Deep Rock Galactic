@@ -428,10 +428,6 @@ label(code)
 label(return)
 
 plamem:
-  cmp [rbx+48],#1
-  jne code
-  cmp [rbx+4C],#4
-  jne code
   cmp [rbx+88],#0x05D38601
   jne code
   cmp [rbx+124],#3593
@@ -509,15 +505,17 @@ label(code)
 label(return)
 
 plmmem:
-  cmp [rdi+38],#0x000C0002
+  cmp [rdi+114],(float)75
   jne code
-  cmp [rdi+88],#0x05420607
+  cmp [rdi+118],(float)75
   jne code
-  cmp [rdi+D8],#13
+  cmp [rdi+128],#0
   jne code
-  cmp [rdi+DC],#24
+  cmp [rdi+130],(double)0.0078125
   jne code
   cmp [rdi+14C],#0x02004621
+  jne code
+  cmp [rdi+150],#256
   jne code
   mov [playermodelp],rdi
 
