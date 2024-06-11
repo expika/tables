@@ -452,10 +452,6 @@ label(code)
 label(return)
 
 plamem:
-  cmp byte ptr [rbx+45],1
-  jne code
-  cmp byte ptr [rbx+A5],1
-  jne code
   mov [playerp],rbx
 
 code:
