@@ -5,41 +5,39 @@
       <ID>113461</ID>
       <Description>"⚔Main"</Description>
       <Options moHideChildren="1"/>
-      <LastState Value="" RealAddress="00000000"/>
       <Color>6400C8</Color>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>113067</ID>
           <Description>"Inf ammo"</Description>
-          <LastState/>
           <Color>6400C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 
-aobscanmodule(ammo,FSD-Win64-Shipping.exe,03 81 8C 06 00 00 66)
+aobscanmodule(ammo,FSD-Win64-Shipping.exe,41 8B 86 9C 06 00 00)
 alloc(ammmem,$1000,ammo)
 
 label(code)
 label(return)
 
 ammmem:
-  mov [rcx+0000068C],#321
+  mov [r14+69C],#321
 
 code:
-  add eax,[rcx+0000068C]
+  mov eax,[r14+0000069C]
   jmp return
 
 ammo:
   jmp ammmem
-  nop
+  nop 2
 return:
 registersymbol(ammo)
 
 [DISABLE]
 
 ammo:
-  db 03 81 8C 06 00 00
+  db 41 8B 86 9C 06 00 00
 
 unregistersymbol(ammo)
 dealloc(ammmem)
@@ -49,36 +47,35 @@ dealloc(ammmem)
           <ID>113792</ID>
           <Description>"No spread"</Description>
           <Options moAlwaysHideChildren="1" moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
-          <LastState/>
           <Color>6400C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 
-aobscanmodule(spread,FSD-Win64-Shipping.exe,F3 0F 58 B3 2C 02 00 00 EB 08 F3 0F 10 B3)
+aobscanmodule(spread,FSD-Win64-Shipping.exe,F3 44 0F 10 83 2C 02 00 00 41)
 alloc(sprmem,$1000,spread)
 
 label(code)
 label(return)
 
 sprmem:
-  mov [rbx+00000228],(float)0
-  mov [rbx+0000022C],(float)0
-  mov [rbx+00000230],(float)0
+  mov [rbx+22C],0
+  mov [rbx+23C],0
+  mov [rbx+240],0
 
 code:
-  addss xmm6,[rbx+0000022C]
+  movss xmm8,[rbx+0000022C]
   jmp return
 
 spread:
   jmp sprmem
-  nop 3
+  nop 4
 return:
 registersymbol(spread)
 
 [DISABLE]
 
 spread:
-  db F3 0F 58 B3 2C 02 00 00
+  db F3 44 0F 10 83 2C 02 00 00
 
 unregistersymbol(spread)
 dealloc(sprmem)
@@ -87,12 +84,11 @@ dealloc(sprmem)
         <CheatEntry>
           <ID>113069</ID>
           <Description>"Rapid fire"</Description>
-          <LastState/>
           <Color>6400C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 
-aobscanmodule(rapid,FSD-Win64-Shipping.exe,F3 41 0F 11 86 C8 06 00 00 41)
+aobscanmodule(rapid,FSD-Win64-Shipping.exe,F3 41 0F 11 86 F8 06 00 00 41)
 alloc(rapmem,$1000,rapid)
 
 label(code)
@@ -101,7 +97,7 @@ label(return)
 rapmem:
 
 code:
-  //movss [r14+000006C8],xmm0
+  //movss [r14+000006F8],xmm0
   jmp return
 
 rapid:
@@ -113,7 +109,7 @@ registersymbol(rapid)
 [DISABLE]
 
 rapid:
-  db F3 41 0F 11 86 C8 06 00 00
+  db F3 41 0F 11 86 F8 06 00 00
 
 unregistersymbol(rapid)
 dealloc(rapmem)
@@ -122,22 +118,21 @@ dealloc(rapmem)
         <CheatEntry>
           <ID>113404</ID>
           <Description>"Fast reload"</Description>
-          <LastState/>
           <Color>6400C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 
-aobscanmodule(reload,FSD-Win64-Shipping.exe,F3 0F 5E B3 88 06 00 00 48 8B) // should be unique
+aobscanmodule(reload,FSD-Win64-Shipping.exe,F3 0F 58 86 98 06 00 00)
 alloc(relmem,$1000,reload)
 
 label(code)
 label(return)
 
 relmem:
-  mov [rbx+00000688],0
+  mov [rsi+698],0
 
 code:
-  divss xmm6,[rbx+00000688]
+  addss xmm0,[rsi+00000698]
   jmp return
 
 reload:
@@ -149,7 +144,7 @@ registersymbol(reload)
 [DISABLE]
 
 reload:
-  db F3 0F 5E B3 88 06 00 00
+  db F3 0F 58 86 98 06 00 00
 
 unregistersymbol(reload)
 dealloc(relmem)
@@ -158,40 +153,39 @@ dealloc(relmem)
         <CheatEntry>
           <ID>113765</ID>
           <Description>"Pickaxe upgrade"</Description>
-          <LastState/>
           <Color>6400C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 
-aobscanmodule(INJECT,FSD-Win64-Shipping.exe,80 BB 6C 03 00 00 00 74 3E)
-alloc(newmem,$1000,INJECT)
+aobscanmodule(pickaxe,FSD-Win64-Shipping.exe,80 BB 7C 03 00 00 00 74 3E)
+alloc(picmem,$1000,pickaxe)
 
 label(code)
 label(return)
 
-newmem:
-  mov [rbx+3F0],#0//cd strong punch
-  mov [rbx+400],#0//1hit
-  mov [rbx+4C0],#0//particles
-  mov [rbx+4C4],#0//particles
+picmem:
+  mov [rbx+400],#0//cd on power attack
+  mov [rbx+410],#0//terrarian
+  mov [rbx+414],#0//terrarian
+  mov [rbx+418],#0//minerals
 
 code:
-  cmp byte ptr [rbx+0000036C],00
+  cmp byte ptr [rbx+0000037C],00
   jmp return
 
-INJECT:
-  jmp newmem
+pickaxe:
+  jmp picmem
   nop 2
 return:
-registersymbol(INJECT)
+registersymbol(pickaxe)
 
 [DISABLE]
 
-INJECT:
-  db 80 BB 6C 03 00 00 00
+pickaxe:
+  db 80 BB 7C 03 00 00 00
 
-unregistersymbol(INJECT)
-dealloc(newmem)
+unregistersymbol(pickaxe)
+dealloc(picmem)
 </AssemblerScript>
         </CheatEntry>
       </CheatEntries>
@@ -200,14 +194,12 @@ dealloc(newmem)
       <ID>113462</ID>
       <Description>"👁Visual"</Description>
       <Options moHideChildren="1"/>
-      <LastState Value="" RealAddress="00000000"/>
       <Color>969600</Color>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>113266</ID>
           <Description>"No recoil"</Description>
-          <LastState/>
           <Color>969600</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -233,7 +225,6 @@ unregistersymbol(recoil)
           <ID>113821</ID>
           <Description>"Strong flashlight"</Description>
           <Options moAlwaysHideChildren="1" moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1" moAllowManualCollapseAndExpand="1"/>
-          <LastState/>
           <Color>969600</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -277,7 +268,6 @@ dealloc(flamem)
         <CheatEntry>
           <ID>113517</ID>
           <Description>"Infinity enemy ping"</Description>
-          <LastState/>
           <Color>969600</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -315,14 +305,12 @@ dealloc(pinmem)
       <ID>113463</ID>
       <Description>"🥾Movement"</Description>
       <Options moHideChildren="1"/>
-      <LastState Value="" Activated="1" RealAddress="00000000"/>
       <Color>0064C8</Color>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>113436</ID>
           <Description>"Infinity jumps"</Description>
-          <LastState/>
           <Color>0064C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -358,7 +346,6 @@ dealloc(newmem)
         <CheatEntry>
           <ID>115472</ID>
           <Description>"No fall damage"</Description>
-          <LastState/>
           <Color>0064C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -371,10 +358,6 @@ label(return)
 
 fadmem:
   cmp [rax+8],#0x00040048
-  jne code
-  cmp byte ptr [rbx+45],1
-  jne code
-  cmp byte ptr [rbx+A5],1
   jne code
   cmp [rax+124],#3593
   jne code
@@ -402,7 +385,6 @@ dealloc(fadmem)
         <CheatEntry>
           <ID>113807</ID>
           <Description>"Acceleration"</Description>
-          <LastState/>
           <Color>0064C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -439,7 +421,6 @@ dealloc(accmem)
           <ID>115462</ID>
           <Description>"Player scan"</Description>
           <Options moHideChildren="1"/>
-          <LastState/>
           <Color>0064C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -452,6 +433,10 @@ label(code)
 label(return)
 
 plamem:
+  cmp byte ptr [rbx+45],1
+  jne code
+  cmp byte ptr [rbx+A5],1
+  jne code
   mov [playerp],rbx
 
 code:
@@ -513,7 +498,6 @@ dealloc(*)
           <ID>113492</ID>
           <Description>"Player model scan"</Description>
           <Options moHideChildren="1"/>
-          <LastState/>
           <Color>0064C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -598,7 +582,6 @@ dealloc(*)
         <CheatEntry>
           <ID>113397</ID>
           <Description>"No collision"</Description>
-          <LastState/>
           <Color>0064C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -634,7 +617,6 @@ dealloc(colmem)
         <CheatEntry>
           <ID>5</ID>
           <Description>"No fall"</Description>
-          <LastState/>
           <Color>0064C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -673,14 +655,12 @@ dealloc(falmem)
       <ID>113464</ID>
       <Description>"💧Specific"</Description>
       <Options moHideChildren="1"/>
-      <LastState Value="" RealAddress="00000000"/>
       <Color>009696</Color>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>34504</ID>
           <Description>"Fast hook"</Description>
-          <LastState/>
           <Color>FF5700</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -715,7 +695,6 @@ dealloc(hoomem)
         <CheatEntry>
           <ID>113822</ID>
           <Description>"A+D spammer"</Description>
-          <LastState/>
           <Color>009696</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{$LUA}
@@ -733,7 +712,6 @@ if ~syntaxcheck then return end
         <CheatEntry>
           <ID>113833</ID>
           <Description>"Auto leaver"</Description>
-          <LastState/>
           <Color>009696</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{$LUA}
@@ -751,14 +729,12 @@ t.destroy()
           <ID>113460</ID>
           <Description>"More players [Host]"</Description>
           <Options moHideChildren="1" moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1" moAllowManualCollapseAndExpand="1"/>
-          <LastState Value="" RealAddress="00000000"/>
           <Color>009696</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
               <ID>113450</ID>
               <Description>"More Players H"</Description>
-              <LastState/>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : FSD-Win64-Shipping.exe
   Version: 
@@ -829,7 +805,6 @@ FSD-Win64-Shipping.exe+16BDC06: CC                    - int 3
             <CheatEntry>
               <ID>113451</ID>
               <Description>"More Players Fix H"</Description>
-              <LastState/>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : FSD-Win64-Shipping.exe
   Version: 
@@ -903,7 +878,6 @@ FSD-Win64-Shipping.exe+1341C33: 49 89 6B 18           - mov [r11+18],rbp
           <ID>115207</ID>
           <Description>"Coordinates scan"</Description>
           <Options moHideChildren="1"/>
-          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 
@@ -973,7 +947,6 @@ dealloc(*)
           <ID>114465</ID>
           <Description>"Camera scan"</Description>
           <Options moHideChildren="1"/>
-          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 
@@ -1030,7 +1003,6 @@ dealloc(*)
             <CheatEntry>
               <ID>114468</ID>
               <Description>"+left"</Description>
-              <LastState/>
               <Color>009696</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{$LUA}
@@ -1052,13 +1024,11 @@ t.destroy()
       <ID>113065</ID>
       <Description>"💡Misc"</Description>
       <Options moHideChildren="1"/>
-      <LastState Value="" RealAddress="00000000"/>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>113066</ID>
           <Description>"Save config"</Description>
-          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{$LUA}
 if syntaxcheck then return end
@@ -1075,7 +1045,6 @@ if ~syntaxcheck then return end
         <CheatEntry>
           <ID>2</ID>
           <Description>"Load config"</Description>
-          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{$LUA}
 if syntaxcheck then return end
@@ -1087,194 +1056,6 @@ on()
 if ~syntaxcheck then return end
 
 [DISABLE]
-</AssemblerScript>
-        </CheatEntry>
-      </CheatEntries>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>115220</ID>
-      <Description>"[BETA]"</Description>
-      <Options moHideChildren="1"/>
-      <LastState Value="" RealAddress="00000000"/>
-      <GroupHeader>1</GroupHeader>
-      <CheatEntries>
-        <CheatEntry>
-          <ID>115225</ID>
-          <Description>"Inf ammo [BETA]"</Description>
-          <LastState/>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>[ENABLE]
-
-aobscanmodule(ammo,FSD-Win64-Shipping.exe,41 8B 86 9C 06 00 00)
-alloc(ammmem,$1000,ammo)
-
-label(code)
-label(return)
-
-ammmem:
-  mov [r14+0000069C],#321
-
-code:
-  mov eax,[r14+0000069C]
-  jmp return
-
-ammo:
-  jmp ammmem
-  nop 2
-return:
-registersymbol(ammo)
-
-[DISABLE]
-
-ammo:
-  db 41 8B 86 9C 06 00 00
-
-unregistersymbol(ammo)
-dealloc(ammmem)
-</AssemblerScript>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>115224</ID>
-          <Description>"Rapid fire [BETA]"</Description>
-          <LastState/>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>[ENABLE]
-
-aobscanmodule(rapid,FSD-Win64-Shipping.exe,F3 41 0F 11 86 F8 06 00 00 41)
-alloc(rapmem,$1000,rapid)
-
-label(code)
-label(return)
-
-rapmem:
-
-code:
-  //movss [r14+000006F8],xmm0
-  jmp return
-
-rapid:
-  jmp rapmem
-  nop 4
-return:
-registersymbol(rapid)
-
-[DISABLE]
-
-rapid:
-  db F3 41 0F 11 86 F8 06 00 00
-
-unregistersymbol(rapid)
-dealloc(rapmem)
-</AssemblerScript>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>115227</ID>
-          <Description>"Fast reload [BETA]"</Description>
-          <LastState/>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>[ENABLE]
-
-aobscanmodule(reload,FSD-Win64-Shipping.exe,F3 0F 58 86 98 06 00 00)
-alloc(relmem,$1000,reload)
-
-label(code)
-label(return)
-
-relmem:
-  mov [rsi+00000698],0
-
-code:
-  addss xmm0,[rsi+00000698]
-  jmp return
-
-reload:
-  jmp relmem
-  nop 3
-return:
-registersymbol(reload)
-
-[DISABLE]
-
-reload:
-  db F3 0F 58 86 98 06 00 00
-
-unregistersymbol(reload)
-dealloc(relmem)
-</AssemblerScript>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>115460</ID>
-          <Description>"No spread [BETA]"</Description>
-          <LastState/>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>[ENABLE]
-
-aobscanmodule(spread,FSD-Win64-Shipping.exe,F3 44 0F 10 83 2C 02 00 00 41)
-alloc(sprmem,$1000,spread)
-
-label(code)
-label(return)
-
-sprmem:
-  mov [rbx+0000022C],0
-  mov [rbx+0000023C],0
-  mov [rbx+00000240],0
-
-code:
-  movss xmm8,[rbx+0000022C]
-  jmp return
-
-spread:
-  jmp sprmem
-  nop 4
-return:
-registersymbol(spread)
-
-[DISABLE]
-
-spread:
-  db F3 44 0F 10 83 2C 02 00 00
-
-unregistersymbol(spread)
-dealloc(sprmem)
-</AssemblerScript>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>115478</ID>
-          <Description>"Pickaxe upgrade [BETA]"</Description>
-          <LastState/>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>[ENABLE]
-
-aobscanmodule(pickaxe,FSD-Win64-Shipping.exe,80 BB 7C 03 00 00 00 74 3E)
-alloc(picmem,$1000,pickaxe)
-
-label(code)
-label(return)
-
-picmem:
-  mov [rbx+400],#0//cd on power attack
-  mov [rbx+410],#0//terrarian
-  mov [rbx+414],#0//terrarian
-  mov [rbx+418],#0//minerals
-
-code:
-  cmp byte ptr [rbx+0000037C],00
-  jmp return
-
-pickaxe:
-  jmp picmem
-  nop 2
-return:
-registersymbol(pickaxe)
-
-[DISABLE]
-
-pickaxe:
-  db 80 BB 7C 03 00 00 00
-
-unregistersymbol(pickaxe)
-dealloc(picmem)
 </AssemblerScript>
         </CheatEntry>
       </CheatEntries>
