@@ -357,10 +357,10 @@ label(code)
 label(return)
 
 fadmem:
-  nop 6
 
 code:
   //mov eax,[rax+000000CC]
+  mov eax,#0
   jmp return
 
 falldmg:
