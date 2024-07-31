@@ -51,31 +51,30 @@ dealloc(ammmem)
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 
-aobscanmodule(spread,FSD-Win64-Shipping.exe,F3 44 0F 10 83 2C 02 00 00 41)
+aobscanmodule(spread,FSD-Win64-Shipping.exe,F3 0F 58 B3 3C 02 00 00 EB 08 F3 0F 10 B3)
 alloc(sprmem,$1000,spread)
 
 label(code)
 label(return)
 
 sprmem:
-  mov [rbx+22C],0
   mov [rbx+23C],0
   mov [rbx+240],0
 
 code:
-  movss xmm8,[rbx+0000022C]
+  addss xmm6,[rbx+0000023C]
   jmp return
 
 spread:
   jmp sprmem
-  nop 4
+  nop 3
 return:
 registersymbol(spread)
 
 [DISABLE]
 
 spread:
-  db F3 44 0F 10 83 2C 02 00 00
+  db F3 0F 58 B3 3C 02 00 00
 
 unregistersymbol(spread)
 dealloc(sprmem)
@@ -83,41 +82,62 @@ dealloc(sprmem)
         </CheatEntry>
         <CheatEntry>
           <ID>113069</ID>
-          <Description>"Rapid fire"</Description>
+          <Description>"Rate of fire"</Description>
+          <Options moHideChildren="1"/>
           <Color>6400C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 
-aobscanmodule(rapid,FSD-Win64-Shipping.exe,F3 41 0F 11 86 F8 06 00 00 41)
+aobscanmodule(rapid,FSD-Win64-Shipping.exe,CC F3 0F 10 81 8C 06 00 00)
 alloc(rapmem,$1000,rapid)
 
 label(code)
 label(return)
+label(rapidl)
 
 rapmem:
+  push eax
+  mov eax,[rapidl]
+  mov [rcx+68C],eax
+  pop eax
 
 code:
-  //movss [r14+000006F8],xmm0
+  movss xmm0,[rcx+0000068C]
   jmp return
 
-rapid:
+rapidl:
+  dq (float)2
+
+rapid+01:
   jmp rapmem
-  nop 4
+  nop 3
 return:
 registersymbol(rapid)
+registersymbol(rapidl)
 
 [DISABLE]
 
-rapid:
-  db F3 41 0F 11 86 F8 06 00 00
+rapid+01:
+  db F3 0F 10 81 8C 06 00 00
 
-unregistersymbol(rapid)
-dealloc(rapmem)
+unregistersymbol(*)
+dealloc(*)
 </AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>115490</ID>
+              <Description>"speed"</Description>
+              <ShowAsSigned>1</ShowAsSigned>
+              <Color>6400C8</Color>
+              <VariableType>Float</VariableType>
+              <Address>rapidl</Address>
+            </CheatEntry>
+          </CheatEntries>
         </CheatEntry>
         <CheatEntry>
           <ID>113404</ID>
-          <Description>"Fast reload"</Description>
+          <Description>"Reload duration"</Description>
+          <Options moHideChildren="1"/>
           <Color>6400C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -127,32 +147,50 @@ alloc(relmem,$1000,reload)
 
 label(code)
 label(return)
+label(reloadl)
 
 relmem:
-  mov [rsi+698],0
+  push eax
+  mov eax,[reloadl]
+  mov [rsi+698],eax
+  pop eax
 
 code:
   addss xmm0,[rsi+00000698]
   jmp return
+
+reloadl:
+  dq (float)0.5
 
 reload:
   jmp relmem
   nop 3
 return:
 registersymbol(reload)
+registersymbol(reloadl)
 
 [DISABLE]
 
 reload:
   db F3 0F 58 86 98 06 00 00
 
-unregistersymbol(reload)
-dealloc(relmem)
+unregistersymbol(*)
+dealloc(*)
 </AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>115611</ID>
+              <Description>"speed"</Description>
+              <ShowAsSigned>1</ShowAsSigned>
+              <Color>6400C8</Color>
+              <VariableType>Float</VariableType>
+              <Address>reloadl</Address>
+            </CheatEntry>
+          </CheatEntries>
         </CheatEntry>
         <CheatEntry>
           <ID>113765</ID>
-          <Description>"Pickaxe upgrade"</Description>
+          <Description>"God pickaxe"</Description>
           <Color>6400C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -168,6 +206,17 @@ picmem:
   mov [rbx+410],#0//terrarian
   mov [rbx+414],#0//terrarian
   mov [rbx+418],#0//minerals
+  mov [rbx+460],#99//rock
+  mov [rbx+464],#99//dirt
+  mov [rbx+468],(float)100000//damage range
+  mov [rbx+46C],(float)100000//mining range
+  mov [rbx+470],#0//damage radius
+  mov [rbx+648],#0//prevent q mining
+  mov [rbx+64C],#0//q mining delay
+  mov [rbx+650],#0//q mining delay 2
+  //mov r9,[rbx+3F8]
+  //mov [r9+1BC],(float)10000//damage radius
+  //mov [r9+1C0],(float)10000//damage radius
 
 code:
   cmp byte ptr [rbx+0000037C],00
@@ -205,11 +254,20 @@ dealloc(picmem)
           <AssemblerScript>[ENABLE]
 
 aobscanmodule(recoil,FSD-Win64-Shipping.exe,F3 0F 10 42 1C 48 8B)
+alloc(recmem,$1000,recoil)
 
+label(code)
 label(return)
 
-recoil:
+recmem:
+  mov [rdx+1C],0
+
+code:
+  movss xmm0,[rdx+1C]
   jmp return
+
+recoil:
+  jmp recmem
 return:
 registersymbol(recoil)
 
@@ -219,12 +277,13 @@ recoil:
   db F3 0F 10 42 1C
 
 unregistersymbol(recoil)
+dealloc(recmem)
 </AssemblerScript>
         </CheatEntry>
         <CheatEntry>
           <ID>113821</ID>
           <Description>"Strong flashlight"</Description>
-          <Options moAlwaysHideChildren="1" moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1" moAllowManualCollapseAndExpand="1"/>
+          <Options moHideChildren="1"/>
           <Color>969600</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -234,69 +293,233 @@ alloc(flamem,$1000,flash)
 
 label(code)
 label(return)
+label(intensity)
 
 flamem:
-  cmp [rbx+330],(float)1100
+  cmp byte ptr [rbx+38],#2
   jne code
-  cmp [rbx+358],(float)21
+  cmp [rbx+D8],#2
   jne code
-  cmp [rbx+35C],(float)30
+  cmp [rbx+DC],#4
   jne code
-  mov [rbx+330],(float)10000
-  mov [rbx+358],(float)100
-  mov [rbx+35C],(float)100
+  cmp byte ptr [rbx+14F],#2
+  jne code
+  cmp [rbx+228],(float)6500
+  jne code
+  cmp [rbx+32C],(float)1024
+  jne code
+  push eax
+  mov eax,[intensity]
+  mov [rbx+20C],eax//Intensity
+  mov [rbx+244],(float)1//SpecularScale
+  mov [rbx+330],(float)100000//AttenuationRadius
+  mov [rbx+358],(float)100//InnerConeAngle
+  mov [rbx+358],(float)100//OuterConeAngle
+  pop eax
 
 code:
   movss xmm1,[rbx+00000330]
   jmp return
+
+intensity:
+  dq (float)1
 
 flash:
   jmp flamem
   nop 3
 return:
 registersymbol(flash)
+registersymbol(intensity)
 
 [DISABLE]
 
 flash:
   db F3 0F 10 8B 30 03 00 00
 
-unregistersymbol(flash)
-dealloc(flamem)
+unregistersymbol(*)
+dealloc(*)
 </AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>115498</ID>
+              <Description>"intensity"</Description>
+              <ShowAsSigned>1</ShowAsSigned>
+              <Color>969600</Color>
+              <VariableType>Float</VariableType>
+              <Address>intensity</Address>
+            </CheatEntry>
+          </CheatEntries>
         </CheatEntry>
         <CheatEntry>
-          <ID>113517</ID>
-          <Description>"Infinity enemy ping"</Description>
+          <ID>38</ID>
+          <Description>"Fov changer"</Description>
+          <Options moHideChildren="1"/>
           <Color>969600</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 
-aobscanmodule(ping,FSD-Win64-Shipping.exe,FF 83 C8 00 00 00 48 83)
-alloc(pinmem,$1000,ping)
+aobscanmodule(fov,FSD-Win64-Shipping.exe,F3 0F 10 83 F8 01 00 00 F3 0F 11)
+alloc(fovmem,$1000,fov)
+
+label(code)
+label(return)
+label(fovl)
+
+fovmem:
+  cmp [rbx+68],#1
+  jne code
+  cmp [rbx+6C],#2
+  jne code
+  mov r9,[fovl]
+  mov [rbx+1F8],r9//k = 1.4545454545454545454545454545455
+
+code:
+  movss xmm0,[rbx+000001F8]
+  jmp return
+
+fovl:
+  dq (float)120.3125//* k = 150 fov [150:103.125] [175:120.3125]
+
+fov:
+  jmp fovmem
+  nop 3
+return:
+registersymbol(fov)
+registersymbol(fovl)
+
+[DISABLE]
+
+fov:
+  db F3 0F 10 83 F8 01 00 00
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>39</ID>
+              <Description>"fov"</Description>
+              <ShowAsSigned>1</ShowAsSigned>
+              <Color>969600</Color>
+              <VariableType>Float</VariableType>
+              <Address>fovl</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>26392</ID>
+          <Description>"Viewmodel changer"</Description>
+          <Options moHideChildren="1"/>
+          <Color>969600</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+
+aobscanmodule(viewm,FSD-Win64-Shipping.exe,F3 0F 10 90 78 02 00 00)
+alloc(viemem,$1000,viewm)
 
 label(code)
 label(return)
 
-pinmem:
+viemem:
+  mov [rax+278],(float)10//offset X
+  mov [rax+27C],(float)-25//offset Y
+  mov [rax+280],(float)10//offset Z
 
 code:
-  //inc [rbx+000000C8]
+  movss xmm2,[rax+00000278]
   jmp return
 
-ping:
-  jmp pinmem
-  nop
+viewm:
+  jmp viemem
+  nop 3
 return:
-registersymbol(ping)
+registersymbol(viewm)
 
 [DISABLE]
 
-ping:
-  db FF 83 C8 00 00 00
+viewm:
+  db F3 0F 10 90 78 02 00 00
 
-unregistersymbol(ping)
-dealloc(pinmem)
+unregistersymbol(viewm)
+dealloc(viemem)
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>115521</ID>
+          <Description>"No screen fade"</Description>
+          <Color>969600</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+
+aobscanmodule(fades,FSD-Win64-Shipping.exe,F3 0F 10 53 58 F3 0F 10 63)
+alloc(fadmem,$1000,fades)
+
+label(code)
+label(return)
+
+fadmem:
+  mov [rbx+58],0
+
+code:
+  movss xmm2,[rbx+58]
+  jmp return
+
+fades:
+  jmp fadmem
+return:
+registersymbol(fades)
+
+[DISABLE]
+
+fades:
+  db F3 0F 10 53 58
+
+unregistersymbol(fades)
+dealloc(fadmem)
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>115683</ID>
+          <Description>"Remove hands animation"</Description>
+          <Color>969600</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+
+aobscanmodule(anim,FSD-Win64-Shipping.exe,48 8B 68 30 48 89 AF 78 04 00 00)
+alloc(animem,$1000,anim)
+
+label(code)
+label(return)
+
+animem:
+  push r9
+  mov r9,[rax+30]
+  mov [r9+94],0
+  mov [rax+40],r9
+  mov [rax+48],r9
+  mov [rax+58],r9
+  mov [rax+60],r9
+  mov [rax+68],r9
+  pop r9
+
+code:
+  mov rbp,[rax+30]
+  mov [rdi+00000478],rbp
+  jmp return
+
+anim:
+  jmp animem
+  nop 6
+return:
+registersymbol(anim)
+
+[DISABLE]
+
+anim:
+  db 48 8B 68 30 48 89 AF 78 04 00 00
+
+unregistersymbol(anim)
+dealloc(animem)
 </AssemblerScript>
         </CheatEntry>
       </CheatEntries>
@@ -357,10 +580,10 @@ label(code)
 label(return)
 
 fadmem:
+  nop 6
 
 code:
   //mov eax,[rax+000000CC]
-  mov eax,#0
   jmp return
 
 falldmg:
@@ -685,15 +908,99 @@ dealloc(hoomem)
 </AssemblerScript>
         </CheatEntry>
         <CheatEntry>
+          <ID>115616</ID>
+          <Description>"God drills"</Description>
+          <Color>00DCFF</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+
+aobscanmodule(drill,FSD-Win64-Shipping.exe,F3 0F 10 86 C0 04 00 00 48)
+alloc(drimem,$1000,drill)
+
+label(code)
+label(return)
+
+drimem:
+  mov [rsi+2FC],0//CurrentHeat
+  mov [rsi+3C0],(float)0.001//EquipDuration
+  mov [rsi+46C],(float)1//MovementPenalty
+  mov [rsi+470],(float)4//MiningRate | 3
+  //mov [rsi+498],(float)100000//DamageDistance | 125
+  //mov [rsi+4A4],(float)99//DamageRate | ??
+  mov [rsi+4C0],(float)44//Fuel
+
+code:
+  movss xmm0,[rsi+000004C0]
+  jmp return
+
+drill:
+  jmp drimem
+  nop 3
+return:
+registersymbol(drill)
+
+[DISABLE]
+
+drill:
+  db F3 0F 10 86 C0 04 00 00
+
+unregistersymbol(drill)
+dealloc(drimem)
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>26395</ID>
+          <Description>"God zipline gun"</Description>
+          <Color>00AF4B</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+
+aobscanmodule(zipline,FSD-Win64-Shipping.exe,02 8B 81 A0 06 00 00)
+alloc(zipmem,$1000,zipline)
+
+label(code)
+label(return)
+
+zipmem:
+  cmp [rcx+7A0],#1
+  jne code
+  cmp [rcx+7A4],#4
+  jne code
+  mov [rcx+780],(float)1000000//MaxDistance | 1000m
+  mov [rcx+784],(float)1//MinDistance | 1m
+  mov [rcx+788],(float)0//MinAngle
+  mov [rcx+78C],(float)90//MaxAngle
+
+code:
+  mov eax,[rcx+000006A0]
+  jmp return
+
+zipline+01:
+  jmp zipmem
+  nop
+return:
+registersymbol(zipline)
+
+[DISABLE]
+
+zipline+01:
+  db 8B 81 A0 06 00 00
+
+unregistersymbol(zipline)
+dealloc(zipmem)
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
           <ID>113822</ID>
           <Description>"A+D spammer"</Description>
           <Color>009696</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{$LUA}
 if syntaxcheck then return end
+if getForegroundProcess() ~= getOpenedProcessID() then return end
 [ENABLE]
 
-on = decodeFunction('c-oWpDNPJ!ketlRCB=/U!NS2(5ypT38s!d+42)bq517l$3MAMV92guO7#P,7+)weVjA^%G3]^@a3r{*UYGO%hNM;$okuW3F1V#i2Qp64BvPnS2K._?p;}UaeU}6/;a69P0pyJ5D$j0c%.ONK+VK,J:#KCGDaj1cat26wr2f2v?XfE6t!a]663rBWprAvN!9t(%jcf2DDTX9ZmYJo5pOqvZS9a.dEbYWy51OPEXCaV')
+on = decodeFunction('c-oWpDNPJ!ketlRCB=/U!NS2(5ypT38s!d+42)bq517l$3MAMV92guO7#P,7+)weVjA^%G3]^@a3r{*UYGO%hNM;$okuVq31V#i2Qp64BvPnS2K._?p;}UaeU}6/;a69P0pyJ5D$j0c%.0ROzW..3{#6fBr9kHu^imNmHt[Qh@9cZpFBh)qfLQn/@M_NtZOMZDC3u}Bnydw*,aZYM#0Sg.YG[)LL:EBH82mk.z$t4s')
 on()
 
 if ~syntaxcheck then return end
@@ -702,311 +1009,192 @@ if ~syntaxcheck then return end
 </AssemblerScript>
         </CheatEntry>
         <CheatEntry>
-          <ID>113833</ID>
-          <Description>"Auto leaver"</Description>
-          <Color>009696</Color>
+          <ID>115578</ID>
+          <Description>"Intoxication scan"</Description>
+          <Options moHideChildren="1"/>
+          <Color>6432FF</Color>
           <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>{$LUA}
-[ENABLE]
+          <AssemblerScript>[ENABLE]
 
-on = decodeFunction('c-oCn%T9wp6urPmD5+v;aiMOF;DIlA0Xrndwh)#fju4%NkwOFX.cjr?5BNiTmn).%wW%h=o6Mba=(I9Kb2geMKAe2*o2Mo,kYTJM+xF!86i?@;l2q+prxOC[oPz/tbs%6iq.Bt2/V+r?7r/dpV5C.4_5(i3V!]v26^vTURjgPfDSleZBg4(PPLWi4B,j9v,Mt}#l$}{W0Y(EotOhy@*@1!pw8NIDQJ?A?aK76@Y.d;?=}M)i+x.9D,Y1]hMEh57yXk;k/AuEr@JRw2:r+SQwdGNymnma2Y.IQ7MNK%vpBvsUSvAh+CG,wUU,P@HUwx.iZ7yaDmR0C?=1nz25uF51Jfco8bnhn!_BQwnzSGu14:QZ]@iTT(Fy2+j')
-on()
-
-[DISABLE]
-
-t.destroy()
-</AssemblerScript>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>113460</ID>
-          <Description>"More players [Host]"</Description>
-          <Options moHideChildren="1" moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1" moAllowManualCollapseAndExpand="1"/>
-          <Color>009696</Color>
-          <GroupHeader>1</GroupHeader>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>113450</ID>
-              <Description>"More Players H"</Description>
-              <VariableType>Auto Assembler Script</VariableType>
-              <AssemblerScript>{ Game   : FSD-Win64-Shipping.exe
-  Version: 
-  Date   : 2023-01-18
-  Author : expika
-
-  This script does blah blah blah
-}
-
-[ENABLE]
-
-aobscanmodule(INJECT,FSD-Win64-Shipping.exe,89 86 A0 05 00 00 48 8B)
-alloc(newmem,$1000,INJECT)
+aobscanmodule(intox,FSD-Win64-Shipping.exe,F3 0F 10 AB E0 00 00 00)
+alloc(intmem,$1000,intox)
+alloc(intoxp,8,intox)
 
 label(code)
 label(return)
 
-newmem:
-  mov [rsi+000005A0],#6
+intmem:
+  mov [intoxp],rbx
 
 code:
-  mov [rsi+000005A0],eax
+  movss xmm5,[rbx+000000E0]
   jmp return
 
-INJECT:
-  jmp newmem
-  nop
+intox:
+  jmp intmem
+  nop 3
 return:
-registersymbol(INJECT)
+registersymbol(intox)
+registersymbol(intoxp)
 
 [DISABLE]
 
-INJECT:
-  db 89 86 A0 05 00 00
+intox:
+  db F3 0F 10 AB E0 00 00 00
 
-unregistersymbol(INJECT)
-dealloc(newmem)
-
-{
-// ORIGINAL CODE - INJECTION POINT: FSD-Win64-Shipping.exe+16BDBF0
-
-FSD-Win64-Shipping.exe+16BDBC5: 49 8B 40 20           - mov rax,[r8+20]
-FSD-Win64-Shipping.exe+16BDBC9: 48 89 83 80 00 00 00  - mov [rbx+00000080],rax
-FSD-Win64-Shipping.exe+16BDBD0: E8 6B 6C 4C 00        - call FSD-Win64-Shipping.exe+1B84840
-FSD-Win64-Shipping.exe+16BDBD5: 48 8B 43 20           - mov rax,[rbx+20]
-FSD-Win64-Shipping.exe+16BDBD9: 48 85 C0              - test rax,rax
-FSD-Win64-Shipping.exe+16BDBDC: 40 0F 95 C7           - setne dil
-FSD-Win64-Shipping.exe+16BDBE0: 48 03 F8              - add rdi,rax
-FSD-Win64-Shipping.exe+16BDBE3: 8B 44 24 30           - mov eax,[rsp+30]
-FSD-Win64-Shipping.exe+16BDBE7: 48 89 7B 20           - mov [rbx+20],rdi
-FSD-Win64-Shipping.exe+16BDBEB: 48 8B 5C 24 38        - mov rbx,[rsp+38]
-// ---------- INJECTING HERE ----------
-FSD-Win64-Shipping.exe+16BDBF0: 89 86 A0 05 00 00     - mov [rsi+000005A0],eax
-// ---------- DONE INJECTING  ----------
-FSD-Win64-Shipping.exe+16BDBF6: 48 8B 74 24 40        - mov rsi,[rsp+40]
-FSD-Win64-Shipping.exe+16BDBFB: 48 83 C4 20           - add rsp,20
-FSD-Win64-Shipping.exe+16BDBFF: 5F                    - pop rdi
-FSD-Win64-Shipping.exe+16BDC00: C3                    - ret 
-FSD-Win64-Shipping.exe+16BDC01: CC                    - int 3 
-FSD-Win64-Shipping.exe+16BDC02: CC                    - int 3 
-FSD-Win64-Shipping.exe+16BDC03: CC                    - int 3 
-FSD-Win64-Shipping.exe+16BDC04: CC                    - int 3 
-FSD-Win64-Shipping.exe+16BDC05: CC                    - int 3 
-FSD-Win64-Shipping.exe+16BDC06: CC                    - int 3 
-}
+unregistersymbol(*)
+dealloc(*)
 </AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>115579</ID>
+              <Description>"IntoxicationLevel"</Description>
+              <ShowAsSigned>1</ShowAsSigned>
+              <Color>6432FF</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>intoxp</Address>
+              <Offsets>
+                <Offset>DC</Offset>
+              </Offsets>
             </CheatEntry>
             <CheatEntry>
-              <ID>113451</ID>
-              <Description>"More Players Fix H"</Description>
-              <VariableType>Auto Assembler Script</VariableType>
-              <AssemblerScript>{ Game   : FSD-Win64-Shipping.exe
-  Version: 
-  Date   : 2023-01-18
-  Author : expika
+              <ID>115598</ID>
+              <Description>"IntoxicationLevelTransition"</Description>
+              <ShowAsSigned>1</ShowAsSigned>
+              <Color>6432FF</Color>
+              <VariableType>Float</VariableType>
+              <Address>intoxp</Address>
+              <Offsets>
+                <Offset>E0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>115580</ID>
+              <Description>"IntoxicationLerpSpeed"</Description>
+              <ShowAsSigned>1</ShowAsSigned>
+              <Color>6432FF</Color>
+              <VariableType>Float</VariableType>
+              <Address>intoxp</Address>
+              <Offsets>
+                <Offset>E4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>115584</ID>
+              <Description>"DrunkenMovementNoiseStrength"</Description>
+              <ShowAsSigned>1</ShowAsSigned>
+              <Color>6432FF</Color>
+              <VariableType>Float</VariableType>
+              <Address>intoxp</Address>
+              <Offsets>
+                <Offset>110</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>115585</ID>
+              <Description>"DrunkenYawNoiseStrength"</Description>
+              <ShowAsSigned>1</ShowAsSigned>
+              <Color>6432FF</Color>
+              <VariableType>Float</VariableType>
+              <Address>intoxp</Address>
+              <Offsets>
+                <Offset>114</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>115586</ID>
+              <Description>"DrunkenPitchNoiseStrength"</Description>
+              <ShowAsSigned>1</ShowAsSigned>
+              <Color>6432FF</Color>
+              <VariableType>Float</VariableType>
+              <Address>intoxp</Address>
+              <Offsets>
+                <Offset>118</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>115599</ID>
+              <Description>"IntoxicationVisualStrength"</Description>
+              <ShowAsSigned>1</ShowAsSigned>
+              <Color>6432FF</Color>
+              <VariableType>Float</VariableType>
+              <Address>intoxp</Address>
+              <Offsets>
+                <Offset>130</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>115587</ID>
+              <Description>"ShoutCooldownMax"</Description>
+              <ShowAsSigned>1</ShowAsSigned>
+              <Color>6432FF</Color>
+              <VariableType>Float</VariableType>
+              <Address>intoxp</Address>
+              <Offsets>
+                <Offset>13C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>115588</ID>
+              <Description>"ShoutCooldownMin"</Description>
+              <ShowAsSigned>1</ShowAsSigned>
+              <Color>6432FF</Color>
+              <VariableType>Float</VariableType>
+              <Address>intoxp</Address>
+              <Offsets>
+                <Offset>140</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>113451</ID>
+          <Description>"More players [Host]"</Description>
+          <Options moHideChildren="1"/>
+          <Color>6432FF</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
 
-  This script does blah blah blah
-}
-
-[ENABLE]
-
-aobscanmodule(INJECT,FSD-Win64-Shipping.exe,8B 81 A0 05 00 00 85)
-alloc(newmem,$1000,INJECT)
+aobscanmodule(players,FSD-Win64-Shipping.exe,06 8B 81 A0 05 00 00)
+alloc(plsmem,$1000,players)
 
 label(code)
 label(return)
+label(amount)
 
-newmem:
-  mov [rcx+000005A0],#6
+plsmem:
+  mov r9,[amount]
+  mov [rcx+5A0],r9
 
 code:
   mov eax,[rcx+000005A0]
   jmp return
 
-INJECT:
-  jmp newmem
+amount:
+  dq #5
+
+players+01:
+  jmp plsmem
   nop
 return:
-registersymbol(INJECT)
+registersymbol(players)
+registersymbol(amount)
 
 [DISABLE]
 
-INJECT:
+players+01:
   db 8B 81 A0 05 00 00
 
-unregistersymbol(INJECT)
-dealloc(newmem)
-
-{
-// ORIGINAL CODE - INJECTION POINT: FSD-Win64-Shipping.exe+1341C1C
-
-FSD-Win64-Shipping.exe+1341BFE: CC                    - int 3 
-FSD-Win64-Shipping.exe+1341BFF: CC                    - int 3 
-FSD-Win64-Shipping.exe+1341C00: 80 B9 1D 07 00 00 00  - cmp byte ptr [rcx+0000071D],00
-FSD-Win64-Shipping.exe+1341C07: 74 06                 - je FSD-Win64-Shipping.exe+1341C0F
-FSD-Win64-Shipping.exe+1341C09: B8 05 00 00 00        - mov eax,00000005
-FSD-Win64-Shipping.exe+1341C0E: C3                    - ret 
-FSD-Win64-Shipping.exe+1341C0F: 48 8B 05 D2 0E C6 04  - mov rax,[FSD-Win64-Shipping.exe+5FA2AE8]
-FSD-Win64-Shipping.exe+1341C16: 8B 00                 - mov eax,[rax]
-FSD-Win64-Shipping.exe+1341C18: 85 C0                 - test eax,eax
-FSD-Win64-Shipping.exe+1341C1A: 7F 0F                 - jg FSD-Win64-Shipping.exe+1341C2B
-// ---------- INJECTING HERE ----------
-FSD-Win64-Shipping.exe+1341C1C: 8B 81 A0 05 00 00     - mov eax,[rcx+000005A0]
-// ---------- DONE INJECTING  ----------
-FSD-Win64-Shipping.exe+1341C22: 85 C0                 - test eax,eax
-FSD-Win64-Shipping.exe+1341C24: 7F 05                 - jg FSD-Win64-Shipping.exe+1341C2B
-FSD-Win64-Shipping.exe+1341C26: B8 04 00 00 00        - mov eax,00000004
-FSD-Win64-Shipping.exe+1341C2B: C3                    - ret 
-FSD-Win64-Shipping.exe+1341C2C: CC                    - int 3 
-FSD-Win64-Shipping.exe+1341C2D: CC                    - int 3 
-FSD-Win64-Shipping.exe+1341C2E: CC                    - int 3 
-FSD-Win64-Shipping.exe+1341C2F: CC                    - int 3 
-FSD-Win64-Shipping.exe+1341C30: 4C 8B DC              - mov r11,rsp
-FSD-Win64-Shipping.exe+1341C33: 49 89 6B 18           - mov [r11+18],rbp
-}
-</AssemblerScript>
-            </CheatEntry>
-          </CheatEntries>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>115207</ID>
-          <Description>"Coordinates scan"</Description>
-          <Options moHideChildren="1"/>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>[ENABLE]
-
-aobscanmodule(coord,FSD-Win64-Shipping.exe,87 30 01 00 00 48 85 C0 74 2B 0F 10 88 D0 01 00 00 48 8D 44 24 60)
-alloc(coomem,$1000,coord)
-alloc(coordp,8)
-
-label(code)
-label(return)
-
-coomem:
-  mov [coordp],rax
-
-code:
-  movups xmm1,[rax+000001D0]
-  jmp return
-
-coord+0A:
-  jmp coomem
-  nop 2
-return:
-registersymbol(coord)
-registersymbol(coordp)
-
-[DISABLE]
-
-coord+0A:
-  db 0F 10 88 D0 01 00 00
-
 unregistersymbol(*)
 dealloc(*)
 </AssemblerScript>
           <CheatEntries>
             <CheatEntry>
-              <ID>115209</ID>
-              <Description>"Coord x"</Description>
-              <ShowAsSigned>0</ShowAsSigned>
-              <VariableType>Float</VariableType>
-              <Address>coordp</Address>
-              <Offsets>
-                <Offset>1D4</Offset>
-              </Offsets>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>115210</ID>
-              <Description>"Coord y"</Description>
-              <ShowAsSigned>0</ShowAsSigned>
-              <VariableType>Float</VariableType>
-              <Address>coordp</Address>
-              <Offsets>
-                <Offset>1D8</Offset>
-              </Offsets>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>115208</ID>
-              <Description>"Coord z"</Description>
-              <ShowAsSigned>0</ShowAsSigned>
-              <VariableType>Float</VariableType>
-              <Address>coordp</Address>
-              <Offsets>
-                <Offset>1D0</Offset>
-              </Offsets>
-            </CheatEntry>
-          </CheatEntries>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>114465</ID>
-          <Description>"Camera scan"</Description>
-          <Options moHideChildren="1"/>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>[ENABLE]
-
-aobscanmodule(camera,FSD-Win64-Shipping.exe,F2 0F 10 81 88 02 00 00 F2)
-alloc(cammem,$1000,camera)
-alloc(camerap,8)
-
-label(code)
-label(return)
-
-cammem:
-  mov [camerap],rcx
-
-code:
-  movsd xmm0,[rcx+00000288]
-  jmp return
-
-camera:
-  jmp cammem
-  nop 3
-return:
-registersymbol(camera)
-registersymbol(camerap)
-
-[DISABLE]
-
-camera:
-  db F2 0F 10 81 88 02 00 00
-
-unregistersymbol(*)
-dealloc(*)
-</AssemblerScript>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>114467</ID>
-              <Description>"Camera x"</Description>
-              <ShowAsSigned>0</ShowAsSigned>
-              <VariableType>Float</VariableType>
-              <Address>campos</Address>
-              <Offsets>
-                <Offset>28C</Offset>
-              </Offsets>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>114466</ID>
-              <Description>"Camera y"</Description>
-              <ShowAsSigned>0</ShowAsSigned>
-              <VariableType>Float</VariableType>
-              <Address>campos</Address>
-              <Offsets>
-                <Offset>288</Offset>
-              </Offsets>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>114468</ID>
-              <Description>"+left"</Description>
-              <Color>009696</Color>
-              <VariableType>Auto Assembler Script</VariableType>
-              <AssemblerScript>{$LUA}
-[ENABLE]
-
-on = decodeFunction('c-nPN,e+Vg5S[KtbQ3B+@vR0gLlHk=.-%736.%4ZWCsbfiEOsozHRjr^0%:MpXMa3[}gJjb7p5adroF6@909VhsiKOjaskg?K,b[q)F(=,p+IZihy7g0]!PrToYK*nqWH*1XD@sn+J=!)+U36Aa_ni:!Jc1t;dbi/)0:%neTX6y3HeJrL(itYpybvzxuo@?W5j}b8I_6:Sy{NPYTcO%]66L9{M,F)e8E,Ek@;q%b5su1+u;ZK.1},3asc]s@LD:kWdIszD^EoUl{noXKRe,X0hTycmI,4b@o]10DaXsr}')
-on()
-
-[DISABLE]
-
-t.destroy()
-</AssemblerScript>
+              <ID>115497</ID>
+              <Description>"amount"</Description>
+              <ShowAsSigned>1</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>amount</Address>
             </CheatEntry>
           </CheatEntries>
         </CheatEntry>
@@ -1026,7 +1214,9 @@ t.destroy()
 if syntaxcheck then return end
 [ENABLE]
 
-on = decodeFunction('c-nnZ!EVz*5S;_%ohWM3L%0.ADksE:3m/@DE:dm,m!cvL2yN{DwNe}MYp3DHx:8#$e{NBiO4=ld6.(lT?CRI2Cylr/)vIF,(Fs8,,Goczbpm?:-OkevwW.0yd/y@K#XLkn2cE2H[mxWx9fl!P7T}rHAwUU3DIu^_e6kDJ2eiXlLInbTyV?kQ[#CY3Ie=M9b[ifmi;4mGK=L8eg,:H:tBSCP2STENUqE)MA,8obyn8orAG^66rFSnIF6@CL!srrlbh*JJnqcMdO5FGu]S4MEr3Y#8XZYvKoxOpF5b)Bs1Bd}+jU3--,H,cH:g[3?mEo81c{l(Ei$bM+sMR:6se7U;co654bDh4X-K;lnXfjpmd[qBX[JIrXv$MB)KX},vc4EV-/aat[*5q/tr+rc2DNjhuX+cCkCW(#gj(*J=w_-L*/,DjiEg6@kf}lvAk.!M%BUT9.3g$,a;.!WW8$DfX5CaNM*p+7vIuyj=ykH8ZM!Q$KYq9B_a62R$A=xfv9suFF/Sc:Xt!-mS!;N@VW.oue+!,P1$6vrygw,')
+name = 'DrgWare.cfg'
+
+on = decodeFunction('c-nnZ!A^#i5S=95oDdO@$f;OeIUv,*zo5HLa5(IjsE^hCDid$bO0gZ.4*n%42XaBZ@bZhHd,0}lAeEl[2fg$,IJDy:sJE]/@}]$w:DoM]Y:7b%z=09d:F:uNu,jK/2;.gebHRX7)4D8PBid^bAO+ms5%9ebU@5BZ#[.z-LI.=!jRaXR[)rwc!mu4M@p68_.ecx#$O}T8GZ%W]8w0tp.NIN9(!S_kWbhTx%w!I.vS)dW=,#dtob_11S;?bZ$v*Jb9O}0P%3FjP#WTKJE1eo[-g3N:hJ6ta7guH%ZUnH*g5K0=1{;Wkm*#LJmfLVl;T,p8S:w,}TE:w-Fqqz;.lPL^f)7VLfj0#I/njS+75CTyAhrg66Gq2=5ghm;ecQ}Z7}}HZt_SchgBu3i((fSz[=B@bRqM)/?N*yznVauHUN*d*D+%MyPRSc+1%BmI%a.q@cBlugg)@,GK:rjZiUVvNcxS3RjH3?ac!{#[*}muK@fDbsXon_nRf?In/aOM)m*D4@!$f)RdZR.=wAtgSrDLqcV-.a7?/N6D9M:PtN#9SX/GxO[[TwO,-HRtthIKj2@qImnoeq,CGTu_3uM*J,6P,ns=W:T^:/%Eh?1lL@jV6TKM0,?jQz^[%SDudCI0/pJ60#8W0#^r.Qgarp^b#w5r(v$3L]MN*IypgpjEzK^sf3[52(#8Vs(:D5M{$Kx##EYNYi;x.O$pvdeuVtpLh@jKmJfMuEvLC?3RAgV/ya3?n5f}S)#81yfBgjr@2b#')
 on()
 
 if ~syntaxcheck then return end
@@ -1042,7 +1232,7 @@ if ~syntaxcheck then return end
 if syntaxcheck then return end
 [ENABLE]
 
-on = decodeFunction('c-n1JOK.Oa5T5l.*:LE85pm#EqAG%[2lxw#ojM4mMFP{I:@=eZ!NQFr,bOMtlyw{X5*xcE[r=!N;?-OI58Qe{]}nV=ZD;RejI?vW:9}FuANLyF/{0{K/y!u39yxM.unGTc/$Z,!QJdA7dwZZJ1^Ekv36?$Nwbm.mh$X.S4XU],F,i-wlvLqN1y18{_CFSOZlttqNFXUdy;Gxqnqr*4uwoFYXBz0#WXmSNQUzvyKFNlUwckCKnxJbnEccbBQB%1SJW40j)Fj:?-ID9$RQohG:o//w(Qu;X2XARkT7xyHPfoZ+U=T)$IpEF!G,r5ev{$Yc5T/,yKvE*MxvF#{$O:j[RI%?Jz=aD!gBf/Lu$K9(XC/nxIc1UpaS_Yn=1YV#=tR58Obo6tO^K94Rr4ih:i+$W@WGx%Jedxy%z}Ke.Fv%bV=)8JWLo-(O7eBaO,GKi;t?DgH7i6}NqvToGaZgIs$bOFP/OKUCW_[+0r124+_Yj{h(2w:^u,EsPjW0%[e@W7oJc58jaAhf#3qNcK4;K2p!Bsk/1nH=k5ig,3=Pp^LRtL?yxtN}*o{t5h7C82?PYEz#hxD:z7*0{IL2X3gm(O_BG,#tDb7C[-n0YJjKqtMXxH4P:eLl)b_X+V*rQ{6O19tLbz7*gt]}@[3,BuZKde5ncU#ECfv}%gKxX;gc2p$uss%T!2Y$EnOf)(prdRFA-4[Iq]XMsg@X,#=T[2g{wnd0nRC%$^,!Mv}OG7P0J(Xdk-9ikzJE*bA2V!3Yp($fV:n2s(:I45Bv+}qJ8y%Gpp/db(L9mTC^(rjP*JcR;,A89lpDTsiCDfi0[?Dg(%=jty')
+on = decodeFunction('c-n/i(2G}]5T3OsYZFQVg$sWrssfZBfy5Jd=KI(}iUf#D2}u#DV3Ed:=EpncUB=k^peN4UIPny5jHtwcCx8n:0+N:@0E]WRN+q^eJUf5i=0numyfSQGg?e!cln/5BMALk59saJR]xXO6n^$PEV2eH,ET{034bmObO:_,N0!T?8$]vU/O!9@aII97C62MZj4O[tcNT3*o[#(9v9%-.WO-mnbfCUQ+];kz^KeO,fZ)/v@*2aT6fVt+St%Hq]1I:lMHI1:[Nkv[XQ+A32]Vn1}L]FSzgeASC[[z,n;$,+7Dk*UPgrqhG(4lq(Ua!M3ST,^]l,F_@3hJ#u0V;v?+ar+EMK/$6.d=;8lg[tIo*E6H%q/.QEde%^*p/.P-.?0:Ne%L8L.=Ssr.5BuPMNM=R:4O7^@SSYErZBPP.-dk9r3c;7#A@z^}OC-Yo}4KHZSljrg,vU^IPC8D?k{;yGk7G^5J)_!V26_#QQ7z;n5KzK-dO6CVrnxozk.Wv(1q3UXBz=iM3*LnzfPG)9EX1lPFltVjdGt;X=wvEfSLmRa%.vK*mS!cR_Y?W6cJ3f}Y*B[XhWNWh6SCK!*Lp7e.uL;]QXp4;qny+AF]OMqP$).0,=r=/1=sE,Ni@8-4dq.P/[U61n3K]%#6;g7aS34E+8XqHK3$fQE1+?1A6Ux+sBUd%k-Yb/aoM@ZGJGt%JK7UQe#J+Jb6$={b^3Mi;QNzl#[SZ:qI2Gm!UW5K[aiC+]10^?swV%7s}Pe!blrQpSKPBQ(aOG6-5_uK0A6P8IojJ96){]Nq:P%@R(Vr*sEI+DCm?x+Ap:RZ%.STI/)1#dkN!zQWY/Ew[F;HzHQ$Pp;=(.zC/ulxsr=s96efnvEQmCfx4@vK]6G1KF;8=VjI7e$9)_66f-xRb9V-,v{o1JVZp/yi=fWqtoZy,g(u{1L,PU$;4wMCtMrx1O')
 on()
 
 if ~syntaxcheck then return end
