@@ -1214,9 +1214,7 @@ dealloc(*)
 if syntaxcheck then return end
 [ENABLE]
 
-name = 'DrgWare.cfg'
-
-on = decodeFunction('c-nnZ!A^#i5S=95oDdO@$f;OeIUv,*zo5HLa5(IjsE^hCDid$bO0gZ.4*n%42XaBZ@bZhHd,0}lAeEl[2fg$,IJDy:sJE]/@}]$w:DoM]Y:7b%z=09d:F:uNu,jK/2;.gebHRX7)4D8PBid^bAO+ms5%9ebU@5BZ#[.z-LI.=!jRaXR[)rwc!mu4M@p68_.ecx#$O}T8GZ%W]8w0tp.NIN9(!S_kWbhTx%w!I.vS)dW=,#dtob_11S;?bZ$v*Jb9O}0P%3FjP#WTKJE1eo[-g3N:hJ6ta7guH%ZUnH*g5K0=1{;Wkm*#LJmfLVl;T,p8S:w,}TE:w-Fqqz;.lPL^f)7VLfj0#I/njS+75CTyAhrg66Gq2=5ghm;ecQ}Z7}}HZt_SchgBu3i((fSz[=B@bRqM)/?N*yznVauHUN*d*D+%MyPRSc+1%BmI%a.q@cBlugg)@,GK:rjZiUVvNcxS3RjH3?ac!{#[*}muK@fDbsXon_nRf?In/aOM)m*D4@!$f)RdZR.=wAtgSrDLqcV-.a7?/N6D9M:PtN#9SX/GxO[[TwO,-HRtthIKj2@qImnoeq,CGTu_3uM*J,6P,ns=W:T^:/%Eh?1lL@jV6TKM0,?jQz^[%SDudCI0/pJ60#8W0#^r.Qgarp^b#w5r(v$3L]MN*IypgpjEzK^sf3[52(#8Vs(:D5M{$Kx##EYNYi;x.O$pvdeuVtpLh@jKmJfMuEvLC?3RAgV/ya3?n5f}S)#81yfBgjr@2b#')
+on = decodeFunction('c-n/h(5qMB5FXo8CzSmW,7lo[4:aQa.=6B?LyM{4%cA9gIE2IvmO?h^(bCNMI4x3dTzCV-gKWBV]xJXYyagAWR4ceKlE=mLMl.]d:I+EnPT:.{^q})Uy6C#_Q{]/nXC47!ANL!0[_(S$[VmGn$QT%!b2Egh9GYq_g!OU::JU#_.k##G/yG+[1GooZ9*N,%@Db:RqRvNzVDQTr@79]+FMDuY8W0tO74hj8.j;C0yd!7@l,wZC2fn3sJlo.5#oZcHGol-@wYF[^).}_j44Cy[Y/S5yTrHNZsB1[pet#N=OA-kn^jv^b#i1e(0JVI(4qS-@i-aLH7t0CoR,z}@%ah/t]YK4$82L-36N!7ZsS}D=v5L^?t3:BT4_*yGKR$XAj$@!G(GJR=UZU$}?v9)^c,.2Tph*zyxyDu#/ffBelIAu;(Sh9:iA/%}N}dyybcTnq*FO(9ndc+w;!a)bAn(EcL=4lB=1*gSGl;T)A7p7UeJ,E?QsT2r+[=a6%*=AgwMuQ.4*W6:DJ0T1@02ASr/s}*,}0N3$!(KLvezACoj1E0jiz.{2GaWCb[X2KgJV1E]p,6S%Oi9nnd;b5K.VD!2g!)$vj')
 on()
 
 if ~syntaxcheck then return end
