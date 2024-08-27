@@ -1016,17 +1016,8 @@ dealloc(fadmem)
 
 {$LUA}
 if syntaxcheck then return end
-client = createTimer()
-client.Interval = 10
-client.OnTimer = function()
-  if readByte('[[[buffer]+2C8]+240]+250') == 128 then
-    writePointer('clientp',readPointer('buffer'))
-    client.Interval = 250
-  else
-    writePointer('clientp',0)
-    client.Interval = 10
-  end
-end
+on = decodeFunction('c-n/f%{T;S5S_TVx)UfCc(I_X1QEOxQSdlPPl8ZE?e){5x]jZD5;l)Tt)3liui%5k+Yf0S)xgWR[S;2LX21D4yk4ZYF#Ph{0}aMq]F..OJ6Vzd!H)aAmcw8ZL8vuI0Br,-Thq$iIdd,-:P[v5V.:^zJX1x5-mFw/rS7t4RiblMRH{SS@T6HKKshZMPBdYI$j58heN(R/BLXf9.z$#Wz_wZjZ:AiM2!6DHZ}hu]j$KFGM!X*8:yO*uf^=UmxH=^(7L7bQ,{Tt7Q7IfIN%FXu(sF)wdN#RaI3F]yj04@E:]YKyQa3M_nE,*w-79*VqkA2,8vX3MaeucmLATp{0RsNBKjzX)AO')
+on()
 {$ASM}
 
 aobscanmodule(client,FSD-Win64-Shipping.exe,F3 0F 11 87 F4 02 00 00 F3)
