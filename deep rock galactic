@@ -5,12 +5,14 @@
       <ID>113461</ID>
       <Description>"⚔Main"</Description>
       <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
       <Color>6400C8</Color>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>113067</ID>
           <Description>"Inf ammo"</Description>
+          <LastState/>
           <Color>6400C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -44,9 +46,47 @@ dealloc(ammmem)
 </AssemblerScript>
         </CheatEntry>
         <CheatEntry>
+          <ID>115614</ID>
+          <Description>"Inf main ammo*"</Description>
+          <LastState/>
+          <Color>6400C8</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+
+aobscanmodule(aammo,FSD-Win64-Shipping.exe,66 0F 6E 91 A0 06 00 00 66 0F 6E 81 84 06 00 00 0F)
+alloc(aammem,$1000,aammo)
+
+label(code)
+label(return)
+
+aammem:
+  mov [rcx+6A0],#321//ammo
+  //mov [rcx+808],0//heat
+
+code:
+  movd xmm2,[rcx+000006A0]
+  jmp return
+
+aammo:
+  jmp aammem
+  nop 3
+return:
+registersymbol(aammo)
+
+[DISABLE]
+
+aammo:
+  db 66 0F 6E 91 A0 06 00 00
+
+unregistersymbol(aammo)
+dealloc(aammem)
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
           <ID>113792</ID>
           <Description>"No spread"</Description>
           <Options moAlwaysHideChildren="1" moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
+          <LastState/>
           <Color>6400C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -84,6 +124,7 @@ dealloc(sprmem)
           <ID>113069</ID>
           <Description>"Rate of fire"</Description>
           <Options moHideChildren="1"/>
+          <LastState/>
           <Color>6400C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -127,6 +168,10 @@ dealloc(*)
             <CheatEntry>
               <ID>115490</ID>
               <Description>"speed"</Description>
+              <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">2:2
+10:10
+35:35
+</DropDownList>
               <ShowAsSigned>1</ShowAsSigned>
               <Color>6400C8</Color>
               <VariableType>Float</VariableType>
@@ -138,6 +183,7 @@ dealloc(*)
           <ID>113404</ID>
           <Description>"Reload duration"</Description>
           <Options moHideChildren="1"/>
+          <LastState/>
           <Color>6400C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -160,7 +206,7 @@ code:
   jmp return
 
 reloadl:
-  dq (float)0.5
+  dq (float)1
 
 reload:
   jmp relmem
@@ -189,8 +235,117 @@ dealloc(*)
           </CheatEntries>
         </CheatEntry>
         <CheatEntry>
+          <ID>115485</ID>
+          <Description>"Fast equip"</Description>
+          <LastState/>
+          <Color>6400C8</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+
+aobscanmodule(equip,FSD-Win64-Shipping.exe,DC 01 F3 0F 10 B3 C8 03 00 00)
+alloc(equmem,$1000,equip)
+
+label(code)
+label(return)
+
+equmem:
+  mov [rbx+3C8],(float)0.001
+
+code:
+  movss xmm6,[rbx+000003C8]
+  jmp return
+
+equip+02:
+  jmp equmem
+  nop 3
+return:
+registersymbol(equip)
+
+[DISABLE]
+
+equip+02:
+  db F3 0F 10 B3 C8 03 00 00
+
+unregistersymbol(equip)
+dealloc(equmem)
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>115499</ID>
+          <Description>"Automatic fire"</Description>
+          <LastState/>
+          <Color>6400C8</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+
+aobscanmodule(auto,FSD-Win64-Shipping.exe,80 BB 4C 07 00 00 00 75 27)
+alloc(autmem,$1000,auto)
+
+label(code)
+label(return)
+
+autmem:
+  mov [rbx+74C],1
+
+code:
+  cmp byte ptr [rbx+0000074C],00
+  jmp return
+
+auto:
+  jmp autmem
+  nop 2
+return:
+registersymbol(auto)
+
+[DISABLE]
+
+auto:
+  db 80 BB 4C 07 00 00 00
+
+unregistersymbol(auto)
+dealloc(autmem)
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>26394</ID>
+          <Description>"Terrarian 1 hit"</Description>
+          <LastState/>
+          <Color>6400C8</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+
+aobscanmodule(terrarian,FSD-Win64-Shipping.exe,41 8B 9C 24 88 00 00 00 41)
+alloc(termem,$1000,terrarian)
+
+label(code)
+label(return)
+
+termem:
+  mov [r12+88],1//HitsNeededToMine
+
+code:
+  mov ebx,[r12+00000088]
+  jmp return
+
+terrarian:
+  jmp termem
+  nop 3
+return:
+registersymbol(terrarian)
+
+[DISABLE]
+
+terrarian:
+  db 41 8B 9C 24 88 00 00 00
+
+unregistersymbol(terrarian)
+dealloc(termem)
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
           <ID>113765</ID>
           <Description>"God pickaxe"</Description>
+          <LastState/>
           <Color>6400C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -237,18 +392,101 @@ unregistersymbol(pickaxe)
 dealloc(picmem)
 </AssemblerScript>
         </CheatEntry>
+        <CheatEntry>
+          <ID>115780</ID>
+          <Description>"Place everywhere"</Description>
+          <Options moAlwaysHideChildren="1" moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
+          <LastState/>
+          <Color>6400C8</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+
+aobscanmodule(placesup,FSD-Win64-Shipping.exe,80 BF EB 01 00 00 00)
+alloc(placsmem,$1000,placesup)
+
+label(code)
+label(return)
+
+placsmem:
+  mov [rdi+F8],(float)500//PlacementDistance
+  mov [rdi+118],0//CanOnlyPlaceOnTerrain
+  mov [rdi+1D0],0//InvalidAroundSize
+  mov [rdi+1EB],1//bCanPlaceMarker
+
+code:
+  cmp byte ptr [rdi+000001EB],00
+  jmp return
+
+placesup:
+  jmp placsmem
+  nop 2
+return:
+registersymbol(placesup)
+
+[DISABLE]
+
+placesup:
+  db 80 BF EB 01 00 00 00
+
+unregistersymbol(placesup)
+dealloc(placsmem)
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>115779</ID>
+              <Description>"Place everywhere turret"</Description>
+              <LastState/>
+              <Color>6400C8</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+
+aobscanmodule(place,FSD-Win64-Shipping.exe,80 B8 EB 01 00 00 00 0F 10 B0)
+alloc(placmem,$1000,place)
+
+label(code)
+label(return)
+
+placmem:
+  mov [rax+F8],(float)500//PlacementDistance
+  mov [rax+118],0//CanOnlyPlaceOnTerrain
+  mov [rax+1D0],0//InvalidAroundSize
+  mov [rax+1EB],1//bCanPlaceMarker
+
+code:
+  cmp byte ptr [rax+000001EB],00
+  jmp return
+
+place:
+  jmp placmem
+  nop 2
+return:
+registersymbol(place)
+
+[DISABLE]
+
+place:
+  db 80 B8 EB 01 00 00 00
+
+unregistersymbol(place)
+dealloc(placmem)
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
       </CheatEntries>
     </CheatEntry>
     <CheatEntry>
       <ID>113462</ID>
       <Description>"👁Visual"</Description>
       <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
       <Color>969600</Color>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>113266</ID>
           <Description>"No recoil"</Description>
+          <LastState/>
           <Color>969600</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -284,6 +522,7 @@ dealloc(recmem)
           <ID>113821</ID>
           <Description>"Strong flashlight"</Description>
           <Options moHideChildren="1"/>
+          <LastState/>
           <Color>969600</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -312,9 +551,9 @@ flamem:
   mov eax,[intensity]
   mov [rbx+20C],eax//Intensity
   mov [rbx+244],(float)1//SpecularScale
-  mov [rbx+330],(float)100000//AttenuationRadius
-  mov [rbx+358],(float)100//InnerConeAngle
-  mov [rbx+358],(float)100//OuterConeAngle
+  mov [rbx+330],(float)1000000000//AttenuationRadius
+  mov [rbx+358],(float)3600//InnerConeAngle
+  mov [rbx+358],(float)3600//OuterConeAngle
   pop eax
 
 code:
@@ -351,9 +590,204 @@ dealloc(*)
           </CheatEntries>
         </CheatEntry>
         <CheatEntry>
+          <ID>26419</ID>
+          <Description>"Settings scan"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <Color>969600</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+
+aobscanmodule(settings,FSD-Win64-Shipping.exe,F3 41 0F 10 97 D0 03 00 00)
+alloc(setmem,$1000,settings)
+alloc(settingsp,8,settings)
+
+label(code)
+label(return)
+
+setmem:
+  mov [settingsp],r15
+
+code:
+  movss xmm2,[r15+000003D0]
+  jmp return
+
+settings:
+  jmp setmem
+  nop 4
+return:
+registersymbol(settings)
+registersymbol(settingsp)
+
+[DISABLE]
+
+settings:
+  db F3 41 0F 10 97 D0 03 00 00
+
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>115572</ID>
+              <Description>"FrameRateLimit"</Description>
+              <ShowAsSigned>1</ShowAsSigned>
+              <Color>969600</Color>
+              <VariableType>Float</VariableType>
+              <Address>settingsp</Address>
+              <Offsets>
+                <Offset>B0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>26426</ID>
+              <Description>"Audio"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <Color>969600</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>26420</ID>
+                  <Description>"volumeCharacterVoice"</Description>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <Color>969600</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>settingsp</Address>
+                  <Offsets>
+                    <Offset>2A0</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>26421</ID>
+                  <Description>"volumeMissionControl"</Description>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <Color>969600</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>settingsp</Address>
+                  <Offsets>
+                    <Offset>2A4</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>26422</ID>
+                  <Description>"volumeMaster"</Description>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <Color>969600</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>settingsp</Address>
+                  <Offsets>
+                    <Offset>2A8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>26423</ID>
+                  <Description>"volumeSFX"</Description>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <Color>969600</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>settingsp</Address>
+                  <Offsets>
+                    <Offset>2AC</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>26424</ID>
+                  <Description>"volumeMusic"</Description>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <Color>969600</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>settingsp</Address>
+                  <Offsets>
+                    <Offset>2B0</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>26425</ID>
+                  <Description>"volumeVoice"</Description>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <Color>969600</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>settingsp</Address>
+                  <Offsets>
+                    <Offset>310</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>26427</ID>
+              <Description>"ChatFontSize"</Description>
+              <ShowAsSigned>1</ShowAsSigned>
+              <Color>969600</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>settingsp</Address>
+              <Offsets>
+                <Offset>380</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>115570</ID>
+              <Description>"HeadbobbingScale"</Description>
+              <ShowAsSigned>1</ShowAsSigned>
+              <Color>969600</Color>
+              <VariableType>Float</VariableType>
+              <Address>settingsp</Address>
+              <Offsets>
+                <Offset>3C0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>115571</ID>
+              <Description>"CameraShakeScale"</Description>
+              <ShowAsSigned>1</ShowAsSigned>
+              <Color>969600</Color>
+              <VariableType>Float</VariableType>
+              <Address>settingsp</Address>
+              <Offsets>
+                <Offset>3C4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>26428</ID>
+              <Description>"ChatFadeTime"</Description>
+              <ShowAsSigned>1</ShowAsSigned>
+              <Color>969600</Color>
+              <VariableType>Float</VariableType>
+              <Address>settingsp</Address>
+              <Offsets>
+                <Offset>3C8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>26429</ID>
+              <Description>"OverlayIntensityScale"</Description>
+              <ShowAsSigned>1</ShowAsSigned>
+              <Color>969600</Color>
+              <VariableType>Float</VariableType>
+              <Address>settingsp</Address>
+              <Offsets>
+                <Offset>3D0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>115709</ID>
+              <Description>"bCanShowBlood"</Description>
+              <ShowAsSigned>1</ShowAsSigned>
+              <Color>969600</Color>
+              <VariableType>Byte</VariableType>
+              <Address>settingsp</Address>
+              <Offsets>
+                <Offset>548</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
           <ID>38</ID>
           <Description>"Fov changer"</Description>
           <Options moHideChildren="1"/>
+          <LastState/>
           <Color>969600</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -410,6 +844,7 @@ dealloc(*)
           <ID>26392</ID>
           <Description>"Viewmodel changer"</Description>
           <Options moHideChildren="1"/>
+          <LastState/>
           <Color>969600</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -421,9 +856,9 @@ label(code)
 label(return)
 
 viemem:
-  mov [rax+278],(float)10//offset X
-  mov [rax+27C],(float)-25//offset Y
-  mov [rax+280],(float)10//offset Z
+  mov [rax+278],(float)10//offset X | +right/-left
+  mov [rax+27C],(float)-25//offset Y | +backward/-forward
+  mov [rax+280],(float)10//offset Z | +down/-up
 
 code:
   movss xmm2,[rax+00000278]
@@ -447,6 +882,7 @@ dealloc(viemem)
         <CheatEntry>
           <ID>115521</ID>
           <Description>"No screen fade"</Description>
+          <LastState/>
           <Color>969600</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -480,7 +916,8 @@ dealloc(fadmem)
         </CheatEntry>
         <CheatEntry>
           <ID>115683</ID>
-          <Description>"Remove hands animation"</Description>
+          <Description>"Remove weapon animation"</Description>
+          <LastState/>
           <Color>969600</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -528,47 +965,14 @@ dealloc(animem)
       <ID>113463</ID>
       <Description>"🥾Movement"</Description>
       <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
       <Color>0064C8</Color>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
-          <ID>113436</ID>
-          <Description>"Infinity jumps"</Description>
-          <Color>0064C8</Color>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>[ENABLE]
-
-aobscanmodule(jumps,FSD-Win64-Shipping.exe,8B 87 44 03 00 00 39)
-alloc(jummem,$1000,jumps)
-
-label(code)
-label(return)
-
-jummem:
-  mov [rdi+00000344],#9999999
-
-code:
-  mov eax,[rdi+00000344]
-  jmp return
-
-jumps:
-  jmp jummem
-  nop
-return:
-registersymbol(jumps)
-
-[DISABLE]
-
-jumps:
-  db 8B 87 44 03 00 00
-
-unregistersymbol(jumps)
-dealloc(newmem)
-</AssemblerScript>
-        </CheatEntry>
-        <CheatEntry>
           <ID>115472</ID>
-          <Description>"No fall damage"</Description>
+          <Description>"No fall damage [buggy]"</Description>
+          <LastState/>
           <Color>0064C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -602,201 +1006,886 @@ dealloc(fadmem)
 </AssemblerScript>
         </CheatEntry>
         <CheatEntry>
-          <ID>113807</ID>
-          <Description>"Acceleration"</Description>
-          <Color>0064C8</Color>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>[ENABLE]
-
-aobscanmodule(acceleration,FSD-Win64-Shipping.exe,F3 0F 10 81 A0 01 00 00)
-alloc(accmem,$1000,acceleration)
-
-label(code)
-label(return)
-
-accmem:
-  mov [rcx+000001A0],(float)100000
-
-code:
-  movss xmm0,[rcx+000001A0]
-  jmp return
-
-acceleration:
-  jmp accmem
-  nop 3
-return:
-registersymbol(acceleration)
-
-[DISABLE]
-
-acceleration:
-  db F3 0F 10 81 A0 01 00 00
-
-unregistersymbol(acceleration)
-dealloc(accmem)
-</AssemblerScript>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>115462</ID>
-          <Description>"Player scan"</Description>
+          <ID>115506</ID>
+          <Description>"Client scan"</Description>
           <Options moHideChildren="1"/>
+          <LastState/>
           <Color>0064C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 
-aobscanmodule(player,FSD-Win64-Shipping.exe,F3 0F 10 83 8C 01 00 00 48 83)
-alloc(plamem,$1000,player)
-alloc(playerp,8)
+{$LUA}
+if syntaxcheck then return end
+client = createTimer()
+client.Interval = 10
+client.OnTimer = function()
+  if readByte('[[[buffer]+2C8]+240]+250') == 128 then
+    writePointer('clientp',readPointer('buffer'))
+    client.Interval = 250
+  else
+    writePointer('clientp',0)
+    client.Interval = 10
+  end
+end
+{$ASM}
+
+aobscanmodule(client,FSD-Win64-Shipping.exe,F3 0F 11 87 F4 02 00 00 F3)
+alloc(climem,$1000,client)
+alloc(clientp,8,client)
+alloc(buffer,8,client)
 
 label(code)
 label(return)
 
-plamem:
-  mov [playerp],rbx
+climem:
+  cmp [rdi+2C8],0//if exists
+  je code
+  mov rdx,[rdi+2C8]
+  cmp [rdx+258],0//if exists
+  je code
+  mov rdx,[rdx+258]
+  cmp byte ptr [rdx+554],1//bIsLocalPlayerController
+  jne code
+  mov [buffer],rdi
 
 code:
-  movss xmm0,[rbx+0000018C]
+  movss [rdi+000002F4],xmm0//Speed
   jmp return
 
-player:
-  jmp plamem
+client:
+  jmp climem
   nop 3
 return:
-registersymbol(player)
-registersymbol(playerp)
+registersymbol(client)
+registersymbol(clientp)
+registersymbol(buffer)
 
 [DISABLE]
 
-player:
-  db F3 0F 10 83 8C 01 00 00
+{$LUA}
+if syntaxcheck then return end
+client.destroy()
+{$ASM}
+
+client:
+  db F3 0F 11 87 F4 02 00 00
 
 unregistersymbol(*)
 dealloc(*)
 </AssemblerScript>
           <CheatEntries>
             <CheatEntry>
-              <ID>115465</ID>
-              <Description>"gravity"</Description>
+              <ID>115560</ID>
+              <Description>"[PlayerState]"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>115562</ID>
+                  <Description>"PlayerId"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Byte</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>224</Offset>
+                    <Offset>240</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115568</ID>
+                  <Description>"Ping"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Byte</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>228</Offset>
+                    <Offset>240</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115712</ID>
+                  <Description>"UniqueId"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>250</Offset>
+                    <Offset>240</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115710</ID>
+                  <Description>"PlayerName"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>String</VariableType>
+                  <Length>25</Length>
+                  <Unicode>1</Unicode>
+                  <CodePage>0</CodePage>
+                  <ZeroTerminate>1</ZeroTerminate>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>0</Offset>
+                    <Offset>300</Offset>
+                    <Offset>240</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115782</ID>
+                  <Description>"PlayerNameLenght"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>308</Offset>
+                    <Offset>240</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115559</ID>
+                  <Description>"IdleTime"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Float</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>D68</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115558</ID>
+                  <Description>"Speed"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Float</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>2F4</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>115607</ID>
+              <Description>"[PlayerStats]"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>115603</ID>
+                  <Description>"TotalKills"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>C0</Offset>
+                    <Offset>3B8</Offset>
+                    <Offset>240</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115604</ID>
+                  <Description>"TotalRevived"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>C4</Offset>
+                    <Offset>3B8</Offset>
+                    <Offset>240</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115605</ID>
+                  <Description>"TotalDeaths"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>C8</Offset>
+                    <Offset>3B8</Offset>
+                    <Offset>240</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115623</ID>
+                  <Description>"TotalRessuplyPodCalled"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>CC</Offset>
+                    <Offset>3B8</Offset>
+                    <Offset>240</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115606</ID>
+                  <Description>"TotalMineralsMined"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Float</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>D8</Offset>
+                    <Offset>3B8</Offset>
+                    <Offset>240</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>115533</ID>
+              <Description>"[CharacterMovement]"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <Color>0064C8</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>115526</ID>
+                  <Description>"GravityScale"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>0064C8</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>150</Offset>
+                    <Offset>288</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115531</ID>
+                  <Description>"JumpZVelocity"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>0064C8</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>158</Offset>
+                    <Offset>288</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115530</ID>
+                  <Description>"MaxWalkSpeed"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>0064C8</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>18C</Offset>
+                    <Offset>288</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115529</ID>
+                  <Description>"MaxAcceleration"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>0064C8</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>1A0</Offset>
+                    <Offset>288</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>115532</ID>
+              <Description>"JumpMaxCount"</Description>
               <ShowAsSigned>0</ShowAsSigned>
               <Color>0064C8</Color>
-              <VariableType>Float</VariableType>
-              <Address>playerp</Address>
+              <VariableType>4 Bytes</VariableType>
+              <Address>clientp</Address>
               <Offsets>
-                <Offset>150</Offset>
+                <Offset>344</Offset>
+                <Offset>2C8</Offset>
               </Offsets>
             </CheatEntry>
             <CheatEntry>
-              <ID>115466</ID>
-              <Description>"jump height"</Description>
+              <ID>115524</ID>
+              <Description>"RunningSpeed"</Description>
               <ShowAsSigned>0</ShowAsSigned>
               <Color>0064C8</Color>
               <VariableType>Float</VariableType>
-              <Address>playerp</Address>
+              <Address>clientp</Address>
               <Offsets>
-                <Offset>158</Offset>
+                <Offset>B90</Offset>
+                <Offset>2C8</Offset>
               </Offsets>
             </CheatEntry>
             <CheatEntry>
-              <ID>115464</ID>
-              <Description>"walk speed"</Description>
+              <ID>115574</ID>
+              <Description>"CanMove"</Description>
               <ShowAsSigned>0</ShowAsSigned>
               <Color>0064C8</Color>
-              <VariableType>Float</VariableType>
-              <Address>playerp</Address>
+              <VariableType>Byte</VariableType>
+              <Address>clientp</Address>
               <Offsets>
-                <Offset>18C</Offset>
+                <Offset>D44</Offset>
+                <Offset>2C8</Offset>
               </Offsets>
             </CheatEntry>
-          </CheatEntries>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>113492</ID>
-          <Description>"Player model scan"</Description>
-          <Options moHideChildren="1"/>
-          <Color>0064C8</Color>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>[ENABLE]
+            <CheatEntry>
+              <ID>115547</ID>
+              <Description>"[Controller]"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <Color>0064C8</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>115549</ID>
+                  <Description>"Camera X"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>0064C8</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>28C</Offset>
+                    <Offset>258</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115548</ID>
+                  <Description>"Camera Y"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>0064C8</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>288</Offset>
+                    <Offset>258</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115550</ID>
+                  <Description>"+left"</Description>
+                  <LastState/>
+                  <Color>009696</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>{$LUA}
+if syntaxcheck then return end
+[ENABLE]
 
-aobscanmodule(playermodel,FSD-Win64-Shipping.exe,8B 87 3C 01 00 00 89 43)
-alloc(plmmem,$1000,playermodel)
-alloc(playermodelp,8)
+x,y = readFloat('[[[clientp]+2C8]+258]+28C'),readFloat('[[[clientp]+2C8]+258]+288')
+local pos
+
+pl = createTimer()
+pl.Interval = 10
+pl.OnTimer = function()
+  pos = readFloat('[[[clientp]+2C8]+258]+28C')
+  if not pos then return end
+  writeFloat('[[[clientp]+2C8]+258]+28C',pos-15)
+end
+
+[DISABLE]
+
+pl.destroy()
+writeFloat('[[[clientp]+2C8]+258]+28C',x)
+writeFloat('[[[clientp]+2C8]+258]+288',y)
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115561</ID>
+                  <Description>"+shiza"</Description>
+                  <LastState/>
+                  <Color>009696</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>{$LUA}
+if syntaxcheck then return end
+[ENABLE]
+
+x,y = readFloat('[[[clientp]+2C8]+258]+28C'),readFloat('[[[clientp]+2C8]+258]+288')
+local pos
+
+sh = createTimer()
+sh.Interval = 50
+sh.OnTimer = function()
+  pos = readFloat('[[[clientp]+2C8]+258]+28C')
+  if not pos then return end
+  writeFloat('[[[clientp]+2C8]+258]+28C',math.random(0,360))
+  writeFloat('[[[clientp]+2C8]+258]+288',math.random(0,360))
+end
+
+[DISABLE]
+
+sh.destroy()
+writeFloat('[[[clientp]+2C8]+258]+28C',x)
+writeFloat('[[[clientp]+2C8]+258]+288',y)
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115618</ID>
+                  <Description>"+yes"</Description>
+                  <LastState/>
+                  <Color>009696</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>{$LUA}
+if syntaxcheck then return end
+[ENABLE]
+
+y = readFloat('[[[clientp]+2C8]+258]+288')
+local a,pos = 0
+
+ye = createTimer()
+ye.Interval = 50
+ye.OnTimer = function()
+  pos = readFloat('[[[clientp]+2C8]+258]+28C')
+  if not pos then return end
+  if a == 0 then
+    writeFloat('[[[clientp]+2C8]+258]+288',y-25)
+    a = 1
+  elseif a == 1 then
+    writeFloat('[[[clientp]+2C8]+258]+288',y+25)
+    a = 0
+  end
+end
+
+[DISABLE]
+
+ye.destroy()
+writeFloat('[[[clientp]+2C8]+258]+288',y)
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115617</ID>
+                  <Description>"+no"</Description>
+                  <LastState/>
+                  <Color>009696</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>{$LUA}
+if syntaxcheck then return end
+[ENABLE]
+
+x = readFloat('[[[clientp]+2C8]+258]+28C')
+local a,pos = 0
+
+no = createTimer()
+no.Interval = 50
+no.OnTimer = function()
+  pos = readFloat('[[[clientp]+2C8]+258]+28C')
+  if not pos then return end
+  if a == 0 then
+    writeFloat('[[[clientp]+2C8]+258]+28C',x-25)
+    a = 1
+  elseif a == 1 then
+    writeFloat('[[[clientp]+2C8]+258]+28C',x+25)
+    a = 0
+  end
+end
+
+[DISABLE]
+
+no.destroy()
+writeFloat('[[[clientp]+2C8]+258]+28C',x)
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115608</ID>
+                  <Description>"Super powder auto shot"</Description>
+                  <LastState/>
+                  <Color>009696</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>{$LUA}
+if syntaxcheck then return end
+if getForegroundProcess() ~= getOpenedProcessID() then return end
+[ENABLE]
+
+local x,y = readFloat('[[[clientp]+2C8]+258]+28C'),readFloat('[[[clientp]+2C8]+258]+288')
+
+writeFloat('[[[clientp]+2C8]+258]+28C',x-180)
+writeFloat('[[[clientp]+2C8]+258]+288',y-(y*2))
+mouse_event(MOUSEEVENTF_LEFTDOWN)
+sleep(20)
+mouse_event(MOUSEEVENTF_LEFTUP)
+writeFloat('[[[clientp]+2C8]+258]+28C',x)
+writeFloat('[[[clientp]+2C8]+258]+288',y)
+
+if ~syntaxcheck then return end
+
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>115542</ID>
+              <Description>"[CapsuleComponent]"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <Color>0064C8</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>115544</ID>
+                  <Description>"Coordinate X"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>0064C8</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>1D0</Offset>
+                    <Offset>290</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115545</ID>
+                  <Description>"Coordinate Y"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>0064C8</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>1D8</Offset>
+                    <Offset>290</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115546</ID>
+                  <Description>"Coordinate Z"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>0064C8</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>1D4</Offset>
+                    <Offset>290</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115539</ID>
+                  <Description>"Size X"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>0064C8</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>134</Offset>
+                    <Offset>290</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115541</ID>
+                  <Description>"Size Y"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>0064C8</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>13C</Offset>
+                    <Offset>290</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115540</ID>
+                  <Description>"Size Z"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>0064C8</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>138</Offset>
+                    <Offset>290</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115534</ID>
+                  <Description>"CollisionEnabled"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>0064C8</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>2E8</Offset>
+                    <Offset>290</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>116048</ID>
+                  <Description>"Freecam"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState/>
+                  <Color>AF7DFF</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+
+{$LUA}
+if syntaxcheck then return end
+on = decodeFunction('c-oy,-A*:(5T3IPcA/rs(_cIwUNoj?)i:22#k+Y:R+ANdO0{(qhAamqK[JUo;*qK4G4Zyqz:JIPd5FG4AEI.4ifmPEaY@Q!Z_2+Xk2AZoPd1KfoACH,Dmj-#9d-T77L2bK#_8sNn/WMH1u];WfN22u0$^-qOyS?PrkgIYVS+[bEC@sW=frm3o%V0w8{tbe4Gji[hs0,-fNc]T+P!kL;oW?mlt;r.X?8i9bN[o@uD=ms]OrUm4gzLL6W%^_n.y4YotlSpJ3Bj0tI6A5clYIzl[QfQv$(kgjQ-a_PR[!IS0nkAEGAuEt4}b7lBHV/+}y[=:JhR:L)VJI8(0pwc@zX72Ol[8)(N=UA$KuRYJ1%MTx)[6D39K0t61nzR-VLS82uG#lsx!nw9W$vd0.cbAfEs]FsKm%[M$OrooR(4niVD[M!q2QC8)6bpj{_u.5.;0gHr%4Y(hXSVll:Llkr%HEwF[Z)Zz*F1s6WjJ_E}JPWfyoz@d@B]m}.j0^cmN2Bd*:Aeo/*Nq;rRkS.Aw@%Osd?]2sV7sQ9yb@gTsF^KfT+L54kJLyhOsXINT=sQbQxIuRi*g2${4+vJNFLW4F:%C.A@Rw?yBR!;#zxpVmH9@Q86p1%[Hp26^nKSBxd_#f+mn_WOL.l3$n7n,o?zFl[=2gO#-Of=FUU54P?AWW4-g1_;]N(f$^A0E)tJ!2[4%p-Y5@^3m0TLaD+l/2b@HG^lm{;Uc]ANm4,C,=Rt=zB*4B7V.j33s#14O6OLv)9)#9p)l7?Me+EtI$4DrhRWQM9WH7BE5fU1?c#s(//d)/,9$wUS-E7Y=WxLl(ox31b?Ea^U3QUSN}')
+on()
+{$ASM}
+
+aobscanmodule(freecam,FSD-Win64-Shipping.exe,F2 0F 10 02 48 8B D9 F2 0F 11 01 48)
+alloc(fremem,$1000,freecam)
 
 label(code)
 label(return)
 
-plmmem:
-  cmp [rdi+114],(float)75
-  jne code
-  cmp [rdi+118],(float)75
-  jne code
-  cmp [rdi+128],#0
-  jne code
-  cmp [rdi+130],(double)0.0078125
-  jne code
-  cmp [rdi+14C],#0x02004621
-  jne code
-  cmp [rdi+150],#256
-  jne code
-  mov [playermodelp],rdi
+label(fcX)
+label(fcY)
+label(fcZ)
+label(fcspeed)
+
+fremem:
+  push rax
+  mov eax,[fcX]
+  mov [rdx],eax
+  mov eax,[fcY]
+  mov [rdx+8],eax
+  mov eax,[fcZ]
+  mov [rdx+4],eax
+  pop rax
 
 code:
-  mov eax,[rdi+0000013C]
+  movsd xmm0,[rdx]
+  mov rbx,rcx
   jmp return
 
-playermodel:
-  jmp plmmem
-  nop
+fcX:
+  readmem([[[clientp]+2C8]+290]+1D0,16)
+
+fcY:
+  readmem([[[clientp]+2C8]+290]+1D8,16)
+
+fcZ:
+  readmem([[[clientp]+2C8]+290]+1D4,16)
+
+fcspeed:
+  dq (float)25
+
+freecam:
+  jmp fremem
+  nop 2
 return:
-registersymbol(playermodel)
-registersymbol(playermodelp)
+registersymbol(freecam)
+registersymbol(fcX)
+registersymbol(fcY)
+registersymbol(fcZ)
+registersymbol(fcspeed)
 
 [DISABLE]
 
-playermodel:
-  db 8B 87 3C 01 00 00
+{$LUA}
+if syntaxcheck then return end
+fc.destroy()
+on = decodeFunction('c-oWpDNPJ!ketlRCB=/U!NS2(5ypT38s!d+42)bqE11j73nbVW92guO7#JEG7#LI;8W[R,13+4dA*F7=+4O}yt1(b%umkn6aF-WlmZZAn/R[M{NJU3SC,B3Q:9Lu0Y8yFQ00_2qVQ6Y0^Dl!;H%;Jc(cZq^H6rLroGcB5H$!C@8L$BW)+]Ka')
+on()
+{$ASM}
+
+freecam:
+  db F2 0F 10 02 48 8B D9
 
 unregistersymbol(*)
 dealloc(*)
 </AssemblerScript>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>115475</ID>
-              <Description>"side width"</Description>
-              <ShowAsSigned>0</ShowAsSigned>
-              <Color>0064C8</Color>
-              <VariableType>Double</VariableType>
-              <Address>playermodelp</Address>
-              <Offsets>
-                <Offset>130</Offset>
-              </Offsets>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>116085</ID>
+                      <Description>"speed"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>AF7DFF</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>fcspeed</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>116087</ID>
+                      <Description>"X"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>AF7DFF</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>fcX</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>116089</ID>
+                      <Description>"Y"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>AF7DFF</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>fcY</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>116088</ID>
+                      <Description>"Z"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>AF7DFF</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>fcZ</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+              </CheatEntries>
             </CheatEntry>
             <CheatEntry>
-              <ID>113495</ID>
-              <Description>"forward width"</Description>
-              <ShowAsSigned>0</ShowAsSigned>
-              <Color>0064C8</Color>
-              <VariableType>Float</VariableType>
-              <Address>playermodelp</Address>
-              <Offsets>
-                <Offset>138</Offset>
-              </Offsets>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>115474</ID>
-              <Description>"height"</Description>
-              <ShowAsSigned>0</ShowAsSigned>
-              <Color>0064C8</Color>
-              <VariableType>Float</VariableType>
-              <Address>playermodelp</Address>
-              <Offsets>
-                <Offset>13C</Offset>
-              </Offsets>
+              <ID>115727</ID>
+              <Description>"[IntoxicationComponent]"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <Color>AF7DFF</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>115728</ID>
+                  <Description>"IntoxicationLevel"</Description>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <Color>AF7DFF</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>DC</Offset>
+                    <Offset>AC0</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115730</ID>
+                  <Description>"CurrentIntoxicationLevel"</Description>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <Color>AF7DFF</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>E0</Offset>
+                    <Offset>AC0</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115729</ID>
+                  <Description>"IntoxicationLerpSpeed"</Description>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <Color>AF7DFF</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>E4</Offset>
+                    <Offset>AC0</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115731</ID>
+                  <Description>"DrunkenMovementNoiseStrength"</Description>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <Color>AF7DFF</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>110</Offset>
+                    <Offset>AC0</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115732</ID>
+                  <Description>"DrunkenYawNoiseStrength"</Description>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <Color>AF7DFF</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>114</Offset>
+                    <Offset>AC0</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115733</ID>
+                  <Description>"DrunkenPitchNoiseStrength"</Description>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <Color>AF7DFF</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>118</Offset>
+                    <Offset>AC0</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115734</ID>
+                  <Description>"IntoxicationVisualStrength"</Description>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <Color>AF7DFF</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>130</Offset>
+                    <Offset>AC0</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115736</ID>
+                  <Description>"IntoxicationVisualStrength"</Description>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <Color>AF7DFF</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>130</Offset>
+                    <Offset>AC0</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115735</ID>
+                  <Description>"ShoutCooldownMax"</Description>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <Color>AF7DFF</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>13C</Offset>
+                    <Offset>AC0</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115737</ID>
+                  <Description>"ShoutCooldownMin"</Description>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <Color>AF7DFF</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>clientp</Address>
+                  <Offsets>
+                    <Offset>140</Offset>
+                    <Offset>AC0</Offset>
+                    <Offset>2C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
             </CheatEntry>
           </CheatEntries>
         </CheatEntry>
         <CheatEntry>
           <ID>113397</ID>
           <Description>"No collision"</Description>
+          <LastState/>
           <Color>0064C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -832,6 +1921,7 @@ dealloc(colmem)
         <CheatEntry>
           <ID>5</ID>
           <Description>"No fall"</Description>
+          <LastState/>
           <Color>0064C8</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -870,26 +1960,31 @@ dealloc(falmem)
       <ID>113464</ID>
       <Description>"💧Specific"</Description>
       <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
       <Color>009696</Color>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>34504</ID>
-          <Description>"Fast hook"</Description>
-          <Color>FF5700</Color>
+          <Description>"God hook"</Description>
+          <LastState/>
+          <Color>FF7800</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 
-aobscanmodule(hook,FSD-Win64-Shipping.exe,F3 0F 11 83 D8 00 00 00 0F 8A)
+aobscanmodule(hook,FSD-Win64-Shipping.exe,F3 0F 10 89 D8 00 00 00 0F)
 alloc(hoomem,$1000,hook)
 
 label(code)
 label(return)
 
 hoomem:
+  mov [rcx+D8],#0//cooldown
+  mov r9,[rcx+E0]
+  mov [r9+3F0],(float)9999999//lenght
 
 code:
-  mov [rbx+000000D8],#0
+  movss xmm1,[rcx+000000D8]
   jmp return
 
 hook:
@@ -901,7 +1996,7 @@ registersymbol(hook)
 [DISABLE]
 
 hook:
-  db F3 0F 11 83 D8 00 00 00
+  db F3 0F 10 89 D8 00 00 00
 
 unregistersymbol(hook)
 dealloc(hoomem)
@@ -910,6 +2005,7 @@ dealloc(hoomem)
         <CheatEntry>
           <ID>115616</ID>
           <Description>"God drills"</Description>
+          <LastState/>
           <Color>00DCFF</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -924,9 +2020,10 @@ drimem:
   mov [rsi+2FC],0//CurrentHeat
   mov [rsi+3C0],(float)0.001//EquipDuration
   mov [rsi+46C],(float)1//MovementPenalty
-  mov [rsi+470],(float)4//MiningRate | 3
+  mov [rsi+470],(float)4//MiningRate | 2.25
+  //mov [rsi+488],(float)150//CarverRayCastLength | 150
   //mov [rsi+498],(float)100000//DamageDistance | 125
-  //mov [rsi+4A4],(float)99//DamageRate | ??
+  mov [rsi+4A4],(float)4//DamageRate | ??
   mov [rsi+4C0],(float)44//Fuel
 
 code:
@@ -951,6 +2048,7 @@ dealloc(drimem)
         <CheatEntry>
           <ID>26395</ID>
           <Description>"God zipline gun"</Description>
+          <LastState/>
           <Color>00AF4B</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
@@ -991,8 +2089,9 @@ dealloc(zipmem)
 </AssemblerScript>
         </CheatEntry>
         <CheatEntry>
-          <ID>113822</ID>
-          <Description>"A+D spammer"</Description>
+          <ID>115504</ID>
+          <Description>"Fast deposit"</Description>
+          <LastState/>
           <Color>009696</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{$LUA}
@@ -1000,8 +2099,52 @@ if syntaxcheck then return end
 if getForegroundProcess() ~= getOpenedProcessID() then return end
 [ENABLE]
 
-on = decodeFunction('c-oWpDNPJ!ketlRCB=/U!NS2(5ypT38s!d+42)bq517l$3MAMV92guO7#P,7+)weVjA^%G3]^@a3r{*UYGO%hNM;$okuVq31V#i2Qp64BvPnS2K._?p;}UaeU}6/;a69P0pyJ5D$j0c%.0ROzW..3{#6fBr9kHu^imNmHt[Qh@9cZpFBh)qfLQn/@M_NtZOMZDC3u}Bnydw*,aZYM#0Sg.YG[)LL:EBH82mk.z$t4s')
+on = decodeFunction('c-oWpDNPJ!ketlRCB=/U!NS2(5ypT38s!d+42)bqFPO^32[*DY92is?8W:bj7#i3Z92mF]I5dLj9H1PR14EM/LjwaVkj:uJmcqi5T$Gwvk^Xhkn[9%e;6urOT2z+pBg[RgpM{Fe4:l$B:7LEUAm*KsCkC/)XtW#1N)Tl.wgv_V#^(!yHiIJ$agcgP9O?zBASbect/O%abjdHzV[@.Rj)25YE6zzxEf8jexsDAe9a[M]4U{}D[X]Q}[hDop1OU+OF82 ')
 on()
+
+[DISABLE]
+
+fd.destroy()
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>115624</ID>
+          <Description>"Fast grenade"</Description>
+          <LastState/>
+          <Color>009696</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript Async="1">{$LUA}
+if syntaxcheck then return end
+if getForegroundProcess() ~= getOpenedProcessID() then return end
+[ENABLE]
+
+[DISABLE]
+
+sleep(150)
+keyDown(VK_CONTROL)
+keyUp(VK_CONTROL)
+if syntaxcheck then return end
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>113822</ID>
+          <Description>"A+D spammer"</Description>
+          <LastState/>
+          <Color>009696</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript Async="1">{$LUA}
+if syntaxcheck then return end
+if getForegroundProcess() ~= getOpenedProcessID() then return end
+[ENABLE]
+
+for i = 1, 18 do
+  keyDown(VK_A)
+  sleep(1)
+  keyUp(VK_A)
+  keyDown(VK_D)
+  sleep(1)
+  keyUp(VK_D)
+end
 
 if ~syntaxcheck then return end
 
@@ -1009,149 +2152,11 @@ if ~syntaxcheck then return end
 </AssemblerScript>
         </CheatEntry>
         <CheatEntry>
-          <ID>115578</ID>
-          <Description>"Intoxication scan"</Description>
-          <Options moHideChildren="1"/>
-          <Color>6432FF</Color>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>[ENABLE]
-
-aobscanmodule(intox,FSD-Win64-Shipping.exe,F3 0F 10 AB E0 00 00 00)
-alloc(intmem,$1000,intox)
-alloc(intoxp,8,intox)
-
-label(code)
-label(return)
-
-intmem:
-  mov [intoxp],rbx
-
-code:
-  movss xmm5,[rbx+000000E0]
-  jmp return
-
-intox:
-  jmp intmem
-  nop 3
-return:
-registersymbol(intox)
-registersymbol(intoxp)
-
-[DISABLE]
-
-intox:
-  db F3 0F 10 AB E0 00 00 00
-
-unregistersymbol(*)
-dealloc(*)
-</AssemblerScript>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>115579</ID>
-              <Description>"IntoxicationLevel"</Description>
-              <ShowAsSigned>1</ShowAsSigned>
-              <Color>6432FF</Color>
-              <VariableType>4 Bytes</VariableType>
-              <Address>intoxp</Address>
-              <Offsets>
-                <Offset>DC</Offset>
-              </Offsets>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>115598</ID>
-              <Description>"IntoxicationLevelTransition"</Description>
-              <ShowAsSigned>1</ShowAsSigned>
-              <Color>6432FF</Color>
-              <VariableType>Float</VariableType>
-              <Address>intoxp</Address>
-              <Offsets>
-                <Offset>E0</Offset>
-              </Offsets>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>115580</ID>
-              <Description>"IntoxicationLerpSpeed"</Description>
-              <ShowAsSigned>1</ShowAsSigned>
-              <Color>6432FF</Color>
-              <VariableType>Float</VariableType>
-              <Address>intoxp</Address>
-              <Offsets>
-                <Offset>E4</Offset>
-              </Offsets>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>115584</ID>
-              <Description>"DrunkenMovementNoiseStrength"</Description>
-              <ShowAsSigned>1</ShowAsSigned>
-              <Color>6432FF</Color>
-              <VariableType>Float</VariableType>
-              <Address>intoxp</Address>
-              <Offsets>
-                <Offset>110</Offset>
-              </Offsets>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>115585</ID>
-              <Description>"DrunkenYawNoiseStrength"</Description>
-              <ShowAsSigned>1</ShowAsSigned>
-              <Color>6432FF</Color>
-              <VariableType>Float</VariableType>
-              <Address>intoxp</Address>
-              <Offsets>
-                <Offset>114</Offset>
-              </Offsets>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>115586</ID>
-              <Description>"DrunkenPitchNoiseStrength"</Description>
-              <ShowAsSigned>1</ShowAsSigned>
-              <Color>6432FF</Color>
-              <VariableType>Float</VariableType>
-              <Address>intoxp</Address>
-              <Offsets>
-                <Offset>118</Offset>
-              </Offsets>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>115599</ID>
-              <Description>"IntoxicationVisualStrength"</Description>
-              <ShowAsSigned>1</ShowAsSigned>
-              <Color>6432FF</Color>
-              <VariableType>Float</VariableType>
-              <Address>intoxp</Address>
-              <Offsets>
-                <Offset>130</Offset>
-              </Offsets>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>115587</ID>
-              <Description>"ShoutCooldownMax"</Description>
-              <ShowAsSigned>1</ShowAsSigned>
-              <Color>6432FF</Color>
-              <VariableType>Float</VariableType>
-              <Address>intoxp</Address>
-              <Offsets>
-                <Offset>13C</Offset>
-              </Offsets>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>115588</ID>
-              <Description>"ShoutCooldownMin"</Description>
-              <ShowAsSigned>1</ShowAsSigned>
-              <Color>6432FF</Color>
-              <VariableType>Float</VariableType>
-              <Address>intoxp</Address>
-              <Offsets>
-                <Offset>140</Offset>
-              </Offsets>
-            </CheatEntry>
-          </CheatEntries>
-        </CheatEntry>
-        <CheatEntry>
           <ID>113451</ID>
           <Description>"More players [Host]"</Description>
           <Options moHideChildren="1"/>
-          <Color>6432FF</Color>
+          <LastState/>
+          <Color>AF7DFF</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>[ENABLE]
 
@@ -1193,6 +2198,7 @@ dealloc(*)
               <ID>115497</ID>
               <Description>"amount"</Description>
               <ShowAsSigned>1</ShowAsSigned>
+              <Color>AF7DFF</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>amount</Address>
             </CheatEntry>
@@ -1204,11 +2210,13 @@ dealloc(*)
       <ID>113065</ID>
       <Description>"💡Misc"</Description>
       <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>113066</ID>
           <Description>"Save config"</Description>
+          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{$LUA}
 if syntaxcheck then return end
@@ -1225,12 +2233,15 @@ if ~syntaxcheck then return end
         <CheatEntry>
           <ID>2</ID>
           <Description>"Load config"</Description>
+          <LastState/>
           <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>{$LUA}
+          <AssemblerScript Async="1">{$LUA}
 if syntaxcheck then return end
 [ENABLE]
 
-on = decodeFunction('c-n/i(2G}]5T3OsYZFQVg$sWrssfZBfy5Jd=KI(}iUf#D2}u#DV3Ed:=EpncUB=k^peN4UIPny5jHtwcCx8n:0+N:@0E]WRN+q^eJUf5i=0numyfSQGg?e!cln/5BMALk59saJR]xXO6n^$PEV2eH,ET{034bmObO:_,N0!T?8$]vU/O!9@aII97C62MZj4O[tcNT3*o[#(9v9%-.WO-mnbfCUQ+];kz^KeO,fZ)/v@*2aT6fVt+St%Hq]1I:lMHI1:[Nkv[XQ+A32]Vn1}L]FSzgeASC[[z,n;$,+7Dk*UPgrqhG(4lq(Ua!M3ST,^]l,F_@3hJ#u0V;v?+ar+EMK/$6.d=;8lg[tIo*E6H%q/.QEde%^*p/.P-.?0:Ne%L8L.=Ssr.5BuPMNM=R:4O7^@SSYErZBPP.-dk9r3c;7#A@z^}OC-Yo}4KHZSljrg,vU^IPC8D?k{;yGk7G^5J)_!V26_#QQ7z;n5KzK-dO6CVrnxozk.Wv(1q3UXBz=iM3*LnzfPG)9EX1lPFltVjdGt;X=wvEfSLmRa%.vK*mS!cR_Y?W6cJ3f}Y*B[XhWNWh6SCK!*Lp7e.uL;]QXp4;qny+AF]OMqP$).0,=r=/1=sE,Ni@8-4dq.P/[U61n3K]%#6;g7aS34E+8XqHK3$fQE1+?1A6Ux+sBUd%k-Yb/aoM@ZGJGt%JK7UQe#J+Jb6$={b^3Mi;QNzl#[SZ:qI2Gm!UW5K[aiC+]10^?swV%7s}Pe!blrQpSKPBQ(aOG6-5_uK0A6P8IojJ96){]Nq:P%@R(Vr*sEI+DCm?x+Ap:RZ%.STI/)1#dkN!zQWY/Ew[F;HzHQ$Pp;=(.zC/ulxsr=s96efnvEQmCfx4@vK]6G1KF;8=VjI7e$9)_66f-xRb9V-,v{o1JVZp/yi=fWqtoZy,g(u{1L,PU$;4wMCtMrx1O')
+MAXwait = 10 --in seconds
+
+on = decodeFunction('c-oCs(2QX96n]?wkG/P8e54mj+^-6cN%[2RLP,*4yIzpmg4)J:N/y^Wou)F!9obIWph[9/rm2MB0%vZV[$(6KG!jVs1#m%=:z%L2BwF5hceA1G0ZZd}?6CALd%ySQ:U2}fwJyUe-yScYEHj)g[U*?MdzNoG1PBV33-!b_[}PI_O*2nk=%;;X]j9Jt0S+KAiUB}5!_prXpHV,XQ3l$x],4]lK*[q5KNLU*xW{R^%*2fVE];+esDmzrgYMA$-36#PQ0PC:)cM4D/J__sgM*lzJVa-F:.60?:DT%hcJH$qC8Poi;Vg;3uZ3%zGL$Js7^]dgvSBJ-Z-BMeupOpM#gx@?QQHG+1N*M+2Au9U;/WM}h:N6dz7.57iukzpo5SoyGPOZr]wneO-ru_2!+dOvI_h)i56E1v!E@NcE9$;@Lkn#bVd1lVs?T]pFd7P]-z_E0e+X!c:Y#Ml*I1:3Bp@h*mXGeWdOk1qE2^X($8)$9[XGxy;z+Qqww_]B!gdjHIa.Hme$FD,KhQsSx!VNMwO{7Hz1OXqUk#fkF;Lt0tH^8$p}wOA@F0rmy%F#96kHtTJjZheJsWhcVq_NdbYPSKu]*!x1Z)adtGSrZ5cBC]J{93-D9;Oou?{}5COVx(rs=?0(Dd,GUyvJdvU5qc/D{#6*MeUEg3T/5BSsdcjmcOl,sueU#-ebW(80h0])[eH!55NoFW!o;1v1=[AEeDB-rD=7wmLFlmS_[ewj^ueIAy#Y#[i9U5yXs#K[pYOc38._LV2.ZAs3!Z9!67UrCAb0;+#yyI-@x*CvsaRDSAvpDL1DlGoH1shmu*Al+%Myd:tOQn0-D+_D7u18=CH.la+JOS3X-@d-H6K8P$}qHVxNIt9Po5zRT#@I0Zw$j@TK+P@lKVGroj2Hm$yp/-U@[vm=5Cwv;RHqd][,:}H!9FSQfd%H,qJGO7oyFkWZ.N_0fsb2[wYJC1Gy;()L3GsJ1$EA.fv8{GDltTS8QmhG*f5[s/Ox?L:Ud{Vx?I2!1=rht=kM.,B0ply*r+mQ1)6)NjYZG}G;8wnwl7_+zQ567iKvMLiUI*)E!grfpnapi!)%T.sm0K7JuqgK(Pj]DJ!D4yfGAh1syxHkY{EzjwGE)+CO6j?UL;}e4=)5fEq3n.7Mo{NSWQ,Cu^9rj!SX%x:-aZ:/H8cFPtY9cpUL4.EJ^.U(=x2xlRr5T$W7voB;fmoM5iV+VcR:DtJk}6d8s8{-#72z/6MR.-42RJ=^%%#-^2+)is-3yo)[-c_g%FC+xOe8fQmF7Uv8X^p09C^4_tpIsut)+[K(,He176gc[]ShBPgs$bX$a51BKQ0[v!kH5nEM#?PR{my31ozN{-%M;w^l9i}^JwIbg*vw9P!v%Y@;p7wlC!bDk=b9;:x44xEU/wEW$=hM!-2X[[?E9JX/$4G8hGx!AXFfU:fZ?C3Mk1/v.*ZpCj3ZHrySOxJ8qJv?p5#Nc!xRW0^3E+*bNM31dn%h?lQ[q:SX3Zh^nCkjC1FXG.}qzDIZ]?#7GbJ1?Y.vR+:n[2iw8!NMx6IXWB=FPuODCN17%6OF:XKdM/mgQguZpNt};WdkF6U#S6#ae=I;LmI$sg')
 on()
 
 if ~syntaxcheck then return end
